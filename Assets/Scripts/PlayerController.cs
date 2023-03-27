@@ -73,5 +73,7 @@ public class PlayerController : MonoBehaviour
     public void Fix3DPosition()//因为只需要执行一次，在切换到3D时执行一次
     {
         trans.position = new Vector3(trans.position.x, trans.position.y, 0);
+        //test commit
+
     }
 }
