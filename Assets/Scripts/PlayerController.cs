@@ -49,7 +49,22 @@ public class PlayerController : MonoBehaviour
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
-            moveDir = new Vector3(horizontal, 0, vertical);
+            float offset = 0.3f;
+            if (horizontal >= offset || vertical >= offset || horizontal<=-offset || vertical <= -offset) 
+            {
+                moveDir = new Vector3(horizontal, 0, vertical);
+                //moveDir = transform.TransformDirection(moveDir);//将moveDir从本地坐标系转换为世界坐标系
+                moveDir = Quaternion.Euler(0, cameraInstance.GetVirtualCamera().transform.eulerAngles.y, 0) * moveDir;//让角色移动方向沿着相机视角方向
+                moveDir.y = 0;
+                moveDir = moveDir.normalized;
+
+                Debug.Log(moveDir);
+            }
+            else
+            {
+                moveDir = Vector3.zero;
+            }
+            
         }
         else if (cameraInstance.Is2DGame())
         {

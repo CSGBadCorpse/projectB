@@ -68,4 +68,8 @@ public class CameraController : MonoBehaviour
 
         return mainCamera.orthographic;
     }
+    public CinemachineVirtualCamera GetVirtualCamera()
+    {
+        return camera_3D;
+    }
 }
