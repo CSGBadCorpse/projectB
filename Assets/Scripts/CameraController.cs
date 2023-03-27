@@ -1,0 +1,71 @@
+using Cinemachine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum GameMode
+{
+    Game2D,
+    Game3D
+}
+
+public class CameraController : MonoBehaviour
+{
+    //用来切换2D视角和3D视角
+    public static CameraController Instance { private set; get; }
+    [SerializeField]
+    private CinemachineVirtualCamera camera_3D;
+
+    private Camera mainCamera;
+
+    private GameMode mode;
+
+    private bool switchMode;
+
+    private void Awake()
+    {
+        Instance = this;
+
+    }
+
+    private void Start()
+    {
+        switchMode = false;
+        mainCamera = Camera.main;
+    }
+
+    private void Update()
+    {
+        switchMode = Input.GetKeyDown(KeyCode.E);//切换视角技能键
+        if (switchMode && ViewChange.Instance.IsChangeFinished())
+        {
+            if (camera_3D.Priority > 2)
+            {
+                camera_3D.Priority = 1;
+                mode = GameMode.Game2D;
+                ViewChange.Instance.ChangeProjection = true;
+            }
+            else if (camera_3D.Priority < 2)
+            {
+                camera_3D.Priority = 3;
+                mode = GameMode.Game3D;
+                PlayerController.Instance.Fix3DPosition();//让角色移动到z=0的位置
+                ViewChange.Instance.ChangeProjection = true;
+            }
+        }
+    }
+
+    public bool Is2DGame()
+    {
+        return mode==GameMode.Game2D;
+    }
+    public bool Is3DGame()
+    {
+        return mode == GameMode.Game3D;
+    }
+    public bool IsOrthographic()
+    {
+
+        return mainCamera.orthographic;
+    }
+}
