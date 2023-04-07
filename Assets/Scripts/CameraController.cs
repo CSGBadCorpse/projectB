@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     //用来切换2D视角和3D视角
     public static CameraController Instance { private set; get; }
     [SerializeField]
-    private CinemachineVirtualCamera camera_3D;
+    private CinemachineVirtualCamera virtualCamera;
 
     private Camera mainCamera;
 
@@ -39,15 +39,15 @@ public class CameraController : MonoBehaviour
         switchMode = Input.GetKeyDown(KeyCode.E);//切换视角技能键
         if (switchMode && ViewChange.Instance.IsChangeFinished())
         {
-            if (camera_3D.Priority > 2)
+            if (virtualCamera.Priority > 2)//如果是3d就切换回2d
             {
-                camera_3D.Priority = 1;
+                virtualCamera.Priority = 1;
                 mode = GameMode.Game2D;
                 ViewChange.Instance.ChangeProjection = true;
             }
-            else if (camera_3D.Priority < 2)
+            else if (virtualCamera.Priority < 2)//如果是2d就切换回3d
             {
-                camera_3D.Priority = 3;
+                virtualCamera.Priority = 3;
                 mode = GameMode.Game3D;
                 PlayerController.Instance.Fix3DPosition();//让角色移动到z=0的位置
                 ViewChange.Instance.ChangeProjection = true;
@@ -70,6 +70,6 @@ public class CameraController : MonoBehaviour
     }
     public CinemachineVirtualCamera GetVirtualCamera()
     {
-        return camera_3D;
+        return virtualCamera;
     }
 }
