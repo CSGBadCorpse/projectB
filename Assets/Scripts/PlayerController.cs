@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         Movement();//移动
     }
 
+
     private void FixedUpdate()
     {
         Debug.DrawRay(localTransform.position, Vector2.down * 1.1f, Color.red);
@@ -117,6 +118,10 @@ public class PlayerController : MonoBehaviour
         {
             //localTransform.rotation = Quaternion.identity;
             //localTransform.forward = localTransform.right;
+            if (trans.position.z < -1.1f|| trans.position.z > 1.1f)
+            {
+                trans.position = new Vector3(trans.position.x, trans.position.y, -1f);
+            }
             float horizontal = Input.GetAxis("Horizontal");
             //float vertical = Input.GetAxis("Vertical");
             moveDir = new Vector3(horizontal, 0, 0);
@@ -130,10 +135,13 @@ public class PlayerController : MonoBehaviour
     public void Fix2DPosition()//2d模式下的移动轴和3d模式下的移动轴不在一条轴上
     {
         //ViewChange.Instance.IsChangeFinished() && 
-        if (cameraInstance.IsOrthographic())
+        /*if (cameraInstance.IsOrthographic())
         {
-            trans.position = new Vector3(trans.position.x, trans.position.y, -1);
-        }
+            
+        }*/
+        localTransform.rotation = Quaternion.identity;
+        localTransform.forward = localTransform.right;
+        trans.position = new Vector3(trans.position.x, trans.position.y, -1);
     }
     public void Fix3DPosition()//因为只需要执行一次，在切换到3D时执行一次
     {
