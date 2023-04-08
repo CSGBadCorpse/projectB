@@ -5,7 +5,7 @@ using UnityEngine;
 public class ViewChange : MonoBehaviour
 {
 	//用来平滑切换透视和正交视角
-	public static ViewChange Instance = null;
+	public static ViewChange Instance { private set; get; }
 
 	/// <summary>
 	/// 相机透视改变是否触发(调用只需把此值改为true)

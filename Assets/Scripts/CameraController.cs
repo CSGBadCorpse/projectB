@@ -43,6 +43,7 @@ public class CameraController : MonoBehaviour
             {
                 virtualCamera.Priority = 1;
                 mode = GameMode.Game2D;
+                PlayerController.Instance.Fix2DPosition();
                 ViewChange.Instance.ChangeProjection = true;
             }
             else if (virtualCamera.Priority < 2)//如果是2d就切换回3d

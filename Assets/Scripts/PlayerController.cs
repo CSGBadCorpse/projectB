@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Transform trans;
     private Rigidbody rb;
     private Vector3 moveDir;
-    private BoxCollider boxCollider;
+    //private BoxCollider boxCollider;
     [SerializeField]
     private float moveSpeed = 5f;
     [SerializeField]
@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         trans = transform;
         rb = GetComponent<Rigidbody>();
-        boxCollider = localTransform.gameObject.GetComponent<BoxCollider>();
+        //rb.freezeRotation = true;
+        //boxCollider = localTransform.gameObject.GetComponent<BoxCollider>();
     }
 
 
@@ -60,10 +61,21 @@ public class PlayerController : MonoBehaviour
         bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), 1.1f, groundLayer);
         //Debug.Log(hit);
         if (hit)
+        {
             isOnGround = true;
+        }
         else
+        {
             isOnGround = false;
+        }
+        //Debug.Log(moveDir);
+        if (isOnGround)
+        {
+            //rb.MovePosition(trans.position + moveDir * moveSpeed * Time.deltaTime);//实际移动语句
+        }
         rb.MovePosition(trans.position + moveDir * moveSpeed * Time.deltaTime);//实际移动语句
+        //rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z) + moveDir * moveSpeed * Time.deltaTime;
+        //rb.AddForce(moveDir.normalized * moveSpeed , ForceMode.Force);
     }
 
     private void Movement()//移动
@@ -77,7 +89,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             //Debug.Log("Jump");
-            rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z) + Vector3.up * jumpForce;
+            //rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z) + Vector3.up * jumpForce;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
         if (cameraInstance.Is3DGame())
         {
@@ -89,8 +102,7 @@ public class PlayerController : MonoBehaviour
                 moveDir = new Vector3(horizontal, 0, vertical);
                 //moveDir = transform.TransformDirection(moveDir);//将moveDir从本地坐标系转换为世界坐标系
                 //moveDir = Quaternion.Euler(0, cameraInstance.GetVirtualCamera().transform.eulerAngles.y, 0) * moveDir;//让角色移动方向沿着相机视角方向
-                moveDir.y = trans.position.y;
-                moveDir = moveDir.normalized;
+                //moveDir.y = trans.position.y;//关键
                 localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x,0,moveDir.z), rotationSpeed * Time.deltaTime);
 
                 //Debug.Log(moveDir);
@@ -103,17 +115,19 @@ public class PlayerController : MonoBehaviour
         }
         else if (cameraInstance.Is2DGame())
         {
-            localTransform.rotation = Quaternion.identity;
-
+            //localTransform.rotation = Quaternion.identity;
+            //localTransform.forward = localTransform.right;
             float horizontal = Input.GetAxis("Horizontal");
             //float vertical = Input.GetAxis("Vertical");
             moveDir = new Vector3(horizontal, 0, 0);
-            Fix2DPosition();//修正不同轴的位置
+            localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x, 0, moveDir.z), rotationSpeed * Time.deltaTime);
+            //Debug.Log(moveDir);
+            //Fix2DPosition();//修正不同轴的位置
         }
         
     }
 
-    private void Fix2DPosition()//2d模式下的移动轴和3d模式下的移动轴不在一条轴上
+    public void Fix2DPosition()//2d模式下的移动轴和3d模式下的移动轴不在一条轴上
     {
         //ViewChange.Instance.IsChangeFinished() && 
         if (cameraInstance.IsOrthographic())
