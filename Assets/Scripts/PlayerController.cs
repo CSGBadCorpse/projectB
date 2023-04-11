@@ -10,15 +10,36 @@ public class PlayerController : MonoBehaviour
     private Transform trans;
     private Rigidbody rb;
     private Vector3 moveDir;
-    //private BoxCollider boxCollider;
+
+    
+
+
+    [SerializeField]
+    [Header("相机控制脚本")]
+    private CameraController cameraInstance = CameraController.Instance;
+
+
+    [Header("跳跃参数")]
+    [SerializeField]
+    private float jumpForce;
+    [SerializeField]
+    private float jumpCooldown;
+    [SerializeField]
+    private float airMultiplier;
+    private bool readyToJump;
+
+    private float playerHeight;
+    private bool isOnGround;
+    [SerializeField]
+    [Header("环境检测")]
+    //用来判断哪一个是地面的图层
+    private LayerMask groundLayer;
+
     [SerializeField]
     private float moveSpeed = 5f;
     [SerializeField]
     [Header("控制角色移动手感的微调参数")]
     private float offset = 0.3f;
-    [SerializeField]
-    [Header("相机控制脚本")]
-    private CameraController cameraInstance = CameraController.Instance;
     [SerializeField]
     [Header("玩家本地坐标")]
     private Transform localTransform;
@@ -26,15 +47,11 @@ public class PlayerController : MonoBehaviour
     [Header("旋转速度")]
     private float rotationSpeed = 2.0f;
     [SerializeField]
-    [Header("跳跃参数")]
-    private float jumpForce = 5f;
-    [SerializeField]
-    [Header("状态")]
-    private bool isOnGround;
-    [SerializeField]
-    [Header("环境检测")]
-    //用来判断哪一个是地面的图层
-    private LayerMask groundLayer;
+    [Header("地面摩擦力")]
+    private float groundDrag;
+
+
+    
 
     private void Awake()
     {
@@ -44,7 +61,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         trans = transform;
+        playerHeight = localTransform.localScale.y;
         rb = GetComponent<Rigidbody>();
+        readyToJump = true;
         //rb.freezeRotation = true;
         //boxCollider = localTransform.gameObject.GetComponent<BoxCollider>();
     }
@@ -52,31 +71,37 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.DrawRay(localTransform.position, Vector2.down * (playerHeight * 0.5f + 0.1f), Color.red);
+        bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), playerHeight * 0.5f + 0.1f, groundLayer);
+        if (hit)
+        {
+            isOnGround = true;
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            isOnGround = false;
+            rb.drag = 0;
+        }
         Movement();//移动
+        SpeedControl();
+        //Debug.Log(rb.velocity);
     }
 
 
     private void FixedUpdate()
     {
-        Debug.DrawRay(localTransform.position, Vector2.down * 1.1f, Color.red);
-        bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), 1.1f, groundLayer);
-        //Debug.Log(hit);
-        if (hit)
-        {
-            isOnGround = true;
-        }
-        else
-        {
-            isOnGround = false;
-        }
-        //Debug.Log(moveDir);
+        //rb.MovePosition(trans.position + moveDir * moveSpeed * Time.deltaTime);//实际移动语句
+        //rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z) + moveDir * moveSpeed * Time.deltaTime;
         if (isOnGround)
         {
-            //rb.MovePosition(trans.position + moveDir * moveSpeed * Time.deltaTime);//实际移动语句
+            rb.AddForce(moveDir.normalized * moveSpeed * 10f, ForceMode.Force);
         }
-        rb.MovePosition(trans.position + moveDir * moveSpeed * Time.deltaTime);//实际移动语句
-        //rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z) + moveDir * moveSpeed * Time.deltaTime;
-        //rb.AddForce(moveDir.normalized * moveSpeed , ForceMode.Force);
+        else if (!isOnGround)
+        {
+            rb.AddForce(moveDir.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+        
     }
 
     private void Movement()//移动
@@ -87,11 +112,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && readyToJump)
         {
-            //Debug.Log("Jump");
             //rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z) + Vector3.up * jumpForce;
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
+
         }
         if (cameraInstance.Is3DGame())
         {
@@ -131,6 +158,26 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+    private void ResetJump()
+    {
+        readyToJump = true;
+    }
+
+    private void SpeedControl()//速度控制
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.y);
+
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
 
     public void Fix2DPosition()//2d模式下的移动轴和3d模式下的移动轴不在一条轴上
     {
@@ -149,4 +196,5 @@ public class PlayerController : MonoBehaviour
         //test commit
 
     }
+
 }

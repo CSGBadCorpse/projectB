@@ -7,6 +7,7 @@ public class Respawn : MonoBehaviour
 {
     public static Respawn Instance { private set; get; }
     public event EventHandler OnPlayerRespawn;
+    
 
     [SerializeField]
     private Transform respawnPoint;
@@ -28,8 +29,12 @@ public class Respawn : MonoBehaviour
 
     private void ResetLevel()
     {
-        playerTransform.position = respawnPoint.transform.position;
-        //BrokenBricks.Instance.ResetLevel();
+        playerTransform.position = respawnPoint.position;
         OnPlayerRespawn?.Invoke(this,EventArgs.Empty);
+    }
+
+    public void SetRespawnPoint(Transform newRespawnPoint)
+    {
+        respawnPoint = newRespawnPoint;
     }
 }
