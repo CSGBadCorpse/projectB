@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance { private set; get; }
     [SerializeField]
     private CinemachineVirtualCamera virtualCamera;
+    [SerializeField]
+    private Transform globalLight;
 
     private Camera mainCamera;
 
@@ -32,6 +34,7 @@ public class CameraController : MonoBehaviour
     {
         switchMode = false;
         mainCamera = Camera.main;
+        globalLight.GetComponent<Light>().shadows = LightShadows.None;
     }
 
     private void Update()
@@ -41,6 +44,8 @@ public class CameraController : MonoBehaviour
         {
             if (virtualCamera.Priority > 2)//如果是3d就切换回2d
             {
+                //LightShadows shadows = globalLight.GetComponent<Light>().shadows;
+                globalLight.GetComponent<Light>().shadows = LightShadows.None;
                 virtualCamera.Priority = 1;
                 mode = GameMode.Game2D;
                 PlayerController.Instance.Fix2DPosition();
@@ -48,6 +53,7 @@ public class CameraController : MonoBehaviour
             }
             else if (virtualCamera.Priority < 2)//如果是2d就切换回3d
             {
+                globalLight.GetComponent<Light>().shadows = LightShadows.Soft;
                 virtualCamera.Priority = 3;
                 mode = GameMode.Game3D;
                 PlayerController.Instance.Fix3DPosition();//让角色移动到z=0的位置

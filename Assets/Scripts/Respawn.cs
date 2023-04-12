@@ -12,6 +12,7 @@ public class Respawn : MonoBehaviour
     [SerializeField]
     private Transform respawnPoint;
     [SerializeField]
+    [Header("Player下的cube")]
     private Transform playerTransform;
 
     private void Awake()
