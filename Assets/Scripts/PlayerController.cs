@@ -16,39 +16,42 @@ public class PlayerController : MonoBehaviour
     [Header("相机控制脚本")]
     private CameraController cameraInstance = CameraController.Instance;
 
+    [Header("角色控制SO")]
+    [SerializeField]
+    private PlayerMovemenSO playerMovemenSO;
 
-    [Header("跳跃参数")]
-    [SerializeField]
+    /*[Header("跳跃参数")]
+    [SerializeField]*/
     private float jumpForce;
-    [SerializeField]
+    //[SerializeField]
     private float jumpCooldown;
-    [SerializeField]
+    //[SerializeField]
     private float airMultiplier;
     private bool readyToJump;
 
     private float playerHeight;
     private bool isOnGround;
-    [SerializeField]
-    [Header("环境检测")]
+    /*[SerializeField]
+    [Header("环境检测")]*/
     //用来判断哪一个是地面的图层
     private LayerMask groundLayer;
-    [SerializeField]
-    [Header("跳跃检测距离")]
+    /*[SerializeField]
+    [Header("跳跃检测距离")]*/
     private float jumpDistance;
 
-    [SerializeField]
-    private float moveSpeed = 5f;
-    [SerializeField]
-    [Header("控制角色移动手感的微调参数")]
-    private float offset = 0.3f;
+    //[SerializeField]
+    private float moveSpeed;
+    //[SerializeField]
+    //[Header("控制角色移动手感的微调参数")]
+    private float offset;
     [SerializeField]
     [Header("玩家本地坐标")]
     private Transform localTransform;
-    [SerializeField]
-    [Header("旋转速度")]
+    /*[SerializeField]
+    [Header("旋转速度")]*/
     private float rotationSpeed = 2.0f;
-    [SerializeField]
-    [Header("地面摩擦力")]
+    /*[SerializeField]
+    [Header("地面摩擦力")]*/
     private float groundDrag;
 
 
@@ -59,6 +62,17 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        jumpForce = playerMovemenSO.jumpForce;
+        jumpCooldown = playerMovemenSO.jumpCooldown;
+        airMultiplier = playerMovemenSO.airMultiplier;
+        groundLayer = playerMovemenSO.groundLayer;
+        jumpDistance = playerMovemenSO.jumpDistance;
+        moveSpeed = playerMovemenSO.moveSpeed;
+        offset = playerMovemenSO.offset;
+        rotationSpeed = playerMovemenSO.rotationSpeed;
+        groundDrag = playerMovemenSO.groundDrag;
+
+
         trans = transform;
         playerHeight = localTransform.localScale.y;
         rb = GetComponent<Rigidbody>();
