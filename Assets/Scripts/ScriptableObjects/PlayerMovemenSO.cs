@@ -23,4 +23,6 @@ public class PlayerMovemenSO : ScriptableObject
     public float rotationSpeed;
     [Header("地面摩擦力")]
     public float groundDrag;
+    [Header("道具获取")]
+    public string triggerName;
 }

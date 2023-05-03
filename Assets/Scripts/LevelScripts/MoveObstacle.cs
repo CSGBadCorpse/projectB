@@ -8,7 +8,14 @@ public class MoveObstacle : MonoBehaviour
     private float moveCircleTime;
     private float currentTime;
     [SerializeField]
-    private float moveInterval;
+    private float moveInterval; 
+    [SerializeField]
+    [Header("相机控制脚本")]
+    private CameraController cameraInstance = CameraController.Instance;
+    [SerializeField]
+    private Transform squareIn2D;
+    [SerializeField]
+    private MeshRenderer meshRenderer;
 
     private void Start()
     {
@@ -30,6 +37,17 @@ public class MoveObstacle : MonoBehaviour
         {
             currentTime = moveCircleTime;
         }
-        
+        if (cameraInstance.Is3DGame())
+        {
+            this.GetComponent<BoxCollider>().isTrigger = true;
+            squareIn2D.gameObject.SetActive(true);
+            meshRenderer.enabled = false;
+        }
+        if (cameraInstance.Is2DGame())
+        {
+            this.GetComponent<BoxCollider>().isTrigger = false;
+            squareIn2D.gameObject.SetActive(false);
+            meshRenderer.enabled = true;
+        }
     }
 }

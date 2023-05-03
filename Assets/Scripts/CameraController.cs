@@ -47,6 +47,7 @@ public class CameraController : MonoBehaviour
                 //LightShadows shadows = globalLight.GetComponent<Light>().shadows;
                 globalLight.GetComponent<Light>().shadows = LightShadows.None;
                 virtualCamera.Priority = 1;
+                //virtualCamera.m_Lens.FieldOfView = 60f;
                 mode = GameMode.Game2D;
                 PlayerController.Instance.Fix2DPosition();
                 ViewChange.Instance.ChangeProjection = true;
@@ -55,6 +56,7 @@ public class CameraController : MonoBehaviour
             {
                 globalLight.GetComponent<Light>().shadows = LightShadows.Soft;
                 virtualCamera.Priority = 3;
+                //virtualCamera.m_Lens.FieldOfView = 80f;
                 mode = GameMode.Game3D;
                 PlayerController.Instance.Fix3DPosition();//让角色移动到z=0的位置
                 ViewChange.Instance.ChangeProjection = true;

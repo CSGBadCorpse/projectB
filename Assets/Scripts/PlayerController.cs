@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     //角色控制脚本
     public static PlayerController Instance { private set; get; }
+    public event EventHandler Event_ActivateTriggers;
+
 
     private Transform trans;
     private Rigidbody rb;
@@ -53,6 +56,9 @@ public class PlayerController : MonoBehaviour
     /*[SerializeField]
     [Header("地面摩擦力")]*/
     private float groundDrag;
+    private string triggerName;
+    //是否拾取了道具
+    private bool pickUpStick;
 
 
     private void Awake()
@@ -71,7 +77,9 @@ public class PlayerController : MonoBehaviour
         offset = playerMovemenSO.offset;
         rotationSpeed = playerMovemenSO.rotationSpeed;
         groundDrag = playerMovemenSO.groundDrag;
+        triggerName = playerMovemenSO.triggerName;
 
+        pickUpStick = false;
 
         trans = transform;
         playerHeight = localTransform.localScale.y;
@@ -97,6 +105,11 @@ public class PlayerController : MonoBehaviour
         }
         Movement();//移动
         SpeedControl();
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ActivateTriggers();//触发互动机关
+        }
     }
 
 
@@ -109,6 +122,22 @@ public class PlayerController : MonoBehaviour
         else if (!isOnGround)
         {
             rb.AddForce(moveDir.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        /*Debug.Log(triggerName);*/
+        if (other.gameObject.CompareTag(triggerName))
+        {
+            Destroy(other.gameObject);
+            /*Debug.Log(other.name);*/
+            //捡起来
+            pickUpStick = true;
+            if (pickUpStick)
+            {
+                Debug.Log("捡起了道具");
+            }
         }
     }
 
@@ -189,4 +218,13 @@ public class PlayerController : MonoBehaviour
         trans.position = new Vector3(trans.position.x, trans.position.y, 0);
     }
 
+    private void ActivateTriggers()
+    {
+        Event_ActivateTriggers?.Invoke(this, EventArgs.Empty);
+    }
+
+    public bool HasTrigger()
+    {
+        return pickUpStick;
+    }
 }
