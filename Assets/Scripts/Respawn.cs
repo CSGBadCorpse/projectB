@@ -30,7 +30,7 @@ public class Respawn : MonoBehaviour
 
     private void ResetLevel()
     {
-        playerTransform.position = respawnPoint.position;
+        playerTransform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, -1);
         OnPlayerRespawn?.Invoke(this,EventArgs.Empty);
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,10 @@ public enum TimeMode
 }
 public class TimeController : MonoBehaviour
 {
+    public static TimeController Instance { get; private set; }
+
+    public event EventHandler Event_OnTimeChanged;
+
     [Header("现在时空的物体")]
     [SerializeField]
     private List<Transform> objectsNow;
@@ -30,6 +35,11 @@ public class TimeController : MonoBehaviour
     private TimeMode time;
     private bool countToAppear;
     private bool countToDisappear;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         time = TimeMode.Now;
@@ -43,49 +53,18 @@ public class TimeController : MonoBehaviour
     {
         
         switchTime = Input.GetKeyDown(KeyCode.R);//切换时空技能键
-        if (switchTime)
+        if (switchTime)//在这里写一个判断开门动画是否完成的判断条件（可以写一个动画管理器判断所有的动画是否完成播放）
         {
-            countToAppear = true;
-            /*if (effectCanvas.alpha != 1)
+            if (time == TimeMode.Old)
             {
-                effectCanvas.alpha += 0.001f;
+                time = TimeMode.Now;
             }
-            if(effectCanvas.alpha >= 1)
+            else if (time == TimeMode.Now)
             {
-                effectCanvas.alpha = 1;
-                Debug.Log("Change Time");
-                foreach (Transform t in objectsNow)
-                {
-                    if (time == TimeMode.Now)
-                    {
-                        t.gameObject.SetActive(false);
-                    }
-                    else if (time == TimeMode.Old)
-                    {
-                        t.gameObject.SetActive(true);
-                    }
-                }
-                foreach (Transform t in objectsOld)
-                {
-                    if (time == TimeMode.Now)
-                    {
-                        t.gameObject.SetActive(true);
-                    }
-                    else if (time == TimeMode.Old)
-                    {
-                        t.gameObject.SetActive(false);
-                    }
-                }
-                if (time == TimeMode.Old)
-                {
-                    time = TimeMode.Now;
-                }
-                else if (time == TimeMode.Now)
-                {
-                    time = TimeMode.Old;
-                }
-            }*/
-            
+                time = TimeMode.Old;
+            }
+            countToAppear = true;
+            Event_OnTimeChanged?.Invoke(this, EventArgs.Empty);
         }
         if (countToAppear && effectCanvas.alpha != 1)
         {
@@ -114,14 +93,7 @@ public class TimeController : MonoBehaviour
                         t.gameObject.SetActive(false);
                     }
                 }
-                if (time == TimeMode.Old)
-                {
-                    time = TimeMode.Now;
-                }
-                else if (time == TimeMode.Now)
-                {
-                    time = TimeMode.Old;
-                }
+                
                 countToAppear = false;
                 countToDisappear = true;
             }
@@ -135,5 +107,10 @@ public class TimeController : MonoBehaviour
             }
             
         }
+    }
+
+    public bool IsNow()
+    {
+        return time == TimeMode.Now;
     }
 }

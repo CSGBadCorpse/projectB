@@ -16,7 +16,7 @@ public class BlockSwitch : MonoBehaviour
 
     private void Update()
     {
-        if (CameraController.Instance.Is2DGame())
+        if (CameraController.Instance.Is2DGame()&& ViewChange.Instance.IsChangeFinished())
         {
             boxCollider.isTrigger = false;
             if (viewOf2D != null)
