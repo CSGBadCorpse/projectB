@@ -9,8 +9,8 @@ public class ThirdCircle : MonoBehaviour
     public event EventHandler Event_OnCircleNotZero;
     private float offset = 4f;
 
-   /* private bool firstCircleEnd = false;
-    private bool secondCircleEnd = false;*/
+    private bool firstCircleEnd = false;
+    private bool secondCircleEnd = false;
 
 
     private void Awake()
@@ -27,12 +27,12 @@ public class ThirdCircle : MonoBehaviour
 
     private void SecondCircle_Event_OnSecondCircleEnd(object sender, EventArgs e)
     {
-        //secondCircleEnd = true;
+        secondCircleEnd = true;
     }
 
     private void FirstCircle_Event_OnFirstCircleEnd(object sender, EventArgs e)
     {
-        //firstCircleEnd = true;
+        firstCircleEnd = true;
     }
 
     // Update is called once per frame

@@ -6,6 +6,10 @@ public class TreeLeafNow : MonoBehaviour
 {
     [SerializeField]
     private float standTime = 5f;
+    public float StandTime
+    {
+        get { return standTime; }
+    }
     [Header("对应的旧时空树叶")]
     [SerializeField]
     private GameObject oldLeaf;
@@ -14,6 +18,12 @@ public class TreeLeafNow : MonoBehaviour
 
     private bool startCountDown;
     private float currentTime;
+
+    public float CurrentTime
+    {
+        get { return currentTime; }
+
+    }
 
     private MeshRenderer meshRenderer;
     private BoxCollider boxCollider;
@@ -35,9 +45,9 @@ public class TreeLeafNow : MonoBehaviour
         //时空切换
         if (TimeController.Instance.IsNow())
         {
-            if (oldLeaf.GetComponent<TreeLeafOld>().GetCurrentTimer() > 0)
+            if (oldLeaf.GetComponent<TreeLeafOld>().CurrentTime > 0)
             {
-                currentTime = standTime - oldLeaf.GetComponent<TreeLeafOld>().GetCurrentTimer();
+                currentTime = standTime - oldLeaf.GetComponent<TreeLeafOld>().CurrentTime;
             }
             EnableSelf();
         }
@@ -110,10 +120,5 @@ public class TreeLeafNow : MonoBehaviour
     public float GetStandTime()
     {
         return standTime;
-    }
-
-    public float GetCurrentTimer()
-    {
-        return currentTime;
     }
 }

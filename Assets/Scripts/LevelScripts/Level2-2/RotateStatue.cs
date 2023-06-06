@@ -20,7 +20,8 @@ public class RotateStatue : MonoBehaviour
 {
 
     private bool enableRotate;
-    private bool activate;
+    //private bool activate;
+    public bool activate { get; private set; }
 
     private bool finalDoorOpened;
 
@@ -71,12 +72,12 @@ public class RotateStatue : MonoBehaviour
         if(statue.eulerAngles.y == GetRotationFromEnum(targetRotation))
         {
             activate = true;
-            //Debug.Log("Fit!!!");
         }
         else
         {
             activate = false;
         }
+        //activate=statue.eulerAngles.y == GetRotationFromEnum(targetRotation) ? true : false;
     }
 
 
@@ -102,8 +103,4 @@ public class RotateStatue : MonoBehaviour
         }
     }
     
-    public bool GetActivatedState()
-    {
-        return activate;
-    }
 }

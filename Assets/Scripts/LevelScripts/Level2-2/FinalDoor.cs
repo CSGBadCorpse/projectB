@@ -34,9 +34,9 @@ public class FinalDoor : MonoBehaviour
 
     private void Update()
     {
-        firstActivated = firstStatue.GetComponent<RotateStatue>().GetActivatedState();
-        secondActivated = secondStatue.GetComponent<RotateStatue>().GetActivatedState();
-        thirdActivated = thirdStatue.GetComponent<RotateStatue>().GetActivatedState();
+        firstActivated = firstStatue.GetComponent<RotateStatue>().activate;
+        secondActivated = secondStatue.GetComponent<RotateStatue>().activate;
+        thirdActivated = thirdStatue.GetComponent<RotateStatue>().activate;
         if (firstActivated && secondActivated && thirdActivated)
         {
             Event_OnDoorOpened?.Invoke(this, EventArgs.Empty);

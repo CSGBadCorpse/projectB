@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Cinemachine;
+using Cinemachine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
@@ -13,8 +13,8 @@ public class DoorPuzzle : MonoBehaviour
     public event EventHandler Event_OnPuzzleSolved;
 
 
-    //[SerializeField]
-    //private CinemachineVirtualCamera puzzleCamera;
+    [SerializeField]
+    private CinemachineVirtualCamera puzzleCamera;
     [SerializeField]
     private GameObject player;
     /*[SerializeField]
@@ -101,7 +101,7 @@ public class DoorPuzzle : MonoBehaviour
         if (figuringPuzzle)
         {
             
-            //puzzleCamera.Priority = 10;
+            puzzleCamera.Priority = 10;
             StartCoroutine(HidePlayerDelay());
 
         }
@@ -111,7 +111,7 @@ public class DoorPuzzle : MonoBehaviour
             firstCircle = false;
             secondCircle = false;
             thirdCircle = false;
-            //puzzleCamera.Priority = 0;
+            puzzleCamera.Priority = 0;
             //Debug.Log("active Player");
 
         }

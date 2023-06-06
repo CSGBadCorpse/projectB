@@ -6,6 +6,10 @@ public class TreeLeafOld : MonoBehaviour
 {
     [SerializeField]
     private float standTime = 3f;
+    public float StandTime
+    {
+        get { return standTime; }
+    }
 
     [Header("对应的现时空树叶")]
     [SerializeField]
@@ -13,6 +17,12 @@ public class TreeLeafOld : MonoBehaviour
 
     private bool startCountDown;
     private float currentTime;
+
+    public float CurrentTime
+    {
+        get { return currentTime; }
+    }
+
 
     private MeshRenderer meshRenderer;
     private BoxCollider boxCollider;
@@ -40,9 +50,9 @@ public class TreeLeafOld : MonoBehaviour
         else if (!TimeController.Instance.IsNow())
         {
             //startCountDown = false;
-            if (nowLeaf.GetComponent<TreeLeafNow>().GetCurrentTimer() > 0)
+            if (nowLeaf.GetComponent<TreeLeafNow>().CurrentTime > 0)
             {
-                currentTime = standTime - (nowLeaf.GetComponent<TreeLeafNow>().GetStandTime() - nowLeaf.GetComponent<TreeLeafNow>().GetCurrentTimer());
+                currentTime = standTime - (nowLeaf.GetComponent<TreeLeafNow>().StandTime - nowLeaf.GetComponent<TreeLeafNow>().CurrentTime);
             }
             EnableSelf();
         }

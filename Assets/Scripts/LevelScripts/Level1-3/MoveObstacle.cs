@@ -8,7 +8,9 @@ public class MoveObstacle : MonoBehaviour
     private float moveCircleTime;
     private float currentTime;
     [SerializeField]
-    private float moveInterval; 
+    private float moveInterval;
+    [SerializeField]
+    private GameObject player;
     [SerializeField]
     [Header("相机控制脚本")]
     private CameraController cameraInstance = CameraController.Instance;
@@ -50,6 +52,23 @@ public class MoveObstacle : MonoBehaviour
             this.GetComponent<BoxCollider>().isTrigger = false;
             squareIn2D.gameObject.SetActive(false);
             meshRenderer.enabled = true;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("Landed");
+            //this.gameObject.transform.child
+            player.transform.SetParent(this.transform);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("Jump");
+            player.transform.SetParent(null);
         }
     }
 }

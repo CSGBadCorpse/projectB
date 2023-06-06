@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour
     //是否拾取了道具
     private bool pickUpStick;
 
+    public bool hasChangeSpaceSkill;
+    
+
 
     private void Awake()
     {
@@ -86,12 +89,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         readyToJump = true;
 
+        hasChangeSpaceSkill = false;
     }
 
 
     private void Update()
     {
-        Debug.DrawRay(localTransform.position, Vector2.down * (playerHeight * 0.5f + jumpDistance), Color.red);
+        Debug.DrawRay(localTransform.position-new Vector3(localTransform.position.x, localTransform.position.y- localTransform.localScale.y/2, localTransform.position.z), Vector2.down * (playerHeight * 0.5f + jumpDistance), Color.red);
         bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), playerHeight * 0.5f + jumpDistance, groundLayer);
         if (hit)
         {

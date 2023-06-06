@@ -27,7 +27,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3017
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -70,7 +70,7 @@ Material:
     - TopDown_Radius: 0.25
     - _Float: 1.86
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: 17
     - foamRadius: 0.83
     - innerFoamRadius: 0.3
     - radiusGradient: 0.3
