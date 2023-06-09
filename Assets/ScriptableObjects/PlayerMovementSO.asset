@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6921095996a094b85c81bcdd6784ad, type: 3}
   m_Name: PlayerMovementSO
   m_EditorClassIdentifier: 
-  jumpForce: 8.5
+  jumpForce: 11
   jumpCooldown: 0.25
-  airMultiplier: 0.5
+  airMultiplier: 0.033
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -22,5 +22,5 @@ MonoBehaviour:
   moveSpeed: 6.5
   offset: 0.3
   rotationSpeed: 7
-  groundDrag: 6.8
+  groundDrag: 12
   triggerName: TriggerStick

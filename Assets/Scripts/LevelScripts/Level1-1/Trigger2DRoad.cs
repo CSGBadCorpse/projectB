@@ -10,7 +10,20 @@ public class Trigger2DRoad : MonoBehaviour
     private void Start()
     {
         colliders = this.GetComponents<BoxCollider>();
-        
+        if (CameraController.Instance.Is3DGame())
+        {
+            foreach (var collider in colliders)
+            {
+                collider.isTrigger = true;
+            }
+        }
+        else if (CameraController.Instance.Is2DGame())
+        {
+            foreach (var collider in colliders)
+            {
+                collider.isTrigger = false;
+            }
+        }
     }
 
     // Update is called once per frame

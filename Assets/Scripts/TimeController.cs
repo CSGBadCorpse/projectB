@@ -75,22 +75,22 @@ public class TimeController : MonoBehaviour
                 {
                     if (time == TimeMode.Now)
                     {
-                        t.gameObject.SetActive(false);
+                        t.gameObject.SetActive(true);
                     }
                     else if (time == TimeMode.Old)
                     {
-                        t.gameObject.SetActive(true);
+                        t.gameObject.SetActive(false);
                     }
                 }
                 foreach (Transform t in objectsOld)
                 {
                     if (time == TimeMode.Now)
                     {
-                        t.gameObject.SetActive(true);
+                        t.gameObject.SetActive(false);
                     }
                     else if (time == TimeMode.Old)
                     {
-                        t.gameObject.SetActive(false);
+                        t.gameObject.SetActive(true);
                     }
                 }
                 

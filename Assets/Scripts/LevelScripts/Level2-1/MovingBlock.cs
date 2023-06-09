@@ -12,6 +12,9 @@ public class MovingBlock : MonoBehaviour
     [SerializeField]
     [Header("移动路径")]
     Transform[] routes;
+    [SerializeField]
+    private GameObject player;
+    
     int index = 0;
 
     public bool activated;//机关是否启用
@@ -55,6 +58,26 @@ public class MovingBlock : MonoBehaviour
     {
         activated=true;
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("Landed");
+            //this.gameObject.transform.child
+            player.transform.SetParent(this.transform);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("Jump");
+            player.transform.SetParent(null);
+        }
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

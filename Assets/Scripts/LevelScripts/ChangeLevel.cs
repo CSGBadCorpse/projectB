@@ -37,6 +37,15 @@ public class ChangeLevel : MonoBehaviour
             Shader.SetGlobalFloat("TopDown_Radius", 1.4f);
             PlayerController.Instance.hasChangeSpaceSkill = true;
         }
+        if (scene.name == "Level2-1")
+        {
+            PlayerController.Instance.hasChangeSpaceSkill = true;
+        }
+        if (scene.name == "Level2-2")
+        {
+            Debug.Log("123");
+            PlayerController.Instance.hasChangeSpaceSkill = true;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -55,9 +64,9 @@ public class ChangeLevel : MonoBehaviour
                     Shader.SetGlobalFloat("TopDown_Radius", 1.4f);
                     SceneManager.LoadScene("Level1-3");
                     break;*/
-                /*case "Level1-3":
+                case "Level1-3":
                     SceneManager.LoadScene("Level2-1");
-                    break;*/
+                    break;
                 case "Level2-1":
                     SceneManager.LoadScene("Level2-2");
                     break;

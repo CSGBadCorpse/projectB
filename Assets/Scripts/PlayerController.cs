@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     [Header("角色控制SO")]
     [SerializeField]
     private PlayerMovemenSO playerMovemenSO;
+    [Header("动画机")]
+    [SerializeField]
+    private Animator animator;
 
     /*[Header("跳跃参数")]
     [SerializeField]*/
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        hasChangeSpaceSkill = false;
     }
 
     private void Start()
@@ -89,7 +93,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         readyToJump = true;
 
-        hasChangeSpaceSkill = false;
+        
     }
 
 
@@ -100,11 +104,13 @@ public class PlayerController : MonoBehaviour
         if (hit)
         {
             isOnGround = true;
+            animator.SetBool("OnGround",isOnGround);
             rb.drag = groundDrag;
         }
         else
         {
             isOnGround = false;
+            animator.SetBool("OnGround", isOnGround);
             rb.drag = 0;
         }
         Movement();//移动
@@ -185,6 +191,7 @@ public class PlayerController : MonoBehaviour
                 trans.position = new Vector3(trans.position.x, trans.position.y, -1f);
             }
             float horizontal = Input.GetAxis("Horizontal");
+            animator.SetFloat("Speed", Math.Abs(horizontal));
             moveDir = new Vector3(horizontal, 0, 0);
             localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x, 0, moveDir.z), rotationSpeed * Time.deltaTime);
         }
@@ -194,6 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(new Vector3(0, 1 * jumpForce, 0), ForceMode.Impulse);
+        //animator.SetBool("OnGround", true);
     }
     private void ResetJump()
     {
