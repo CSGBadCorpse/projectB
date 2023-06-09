@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     //角色控制脚本
     public static PlayerController Instance { private set; get; }
     public event EventHandler Event_ActivateTriggers;
-
+    //
 
     private Transform trans;
     private Rigidbody rb;
