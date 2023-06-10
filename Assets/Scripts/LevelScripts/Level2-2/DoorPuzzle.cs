@@ -30,6 +30,9 @@ public class DoorPuzzle : MonoBehaviour
     [SerializeField]
     private GameObject oldDoorOpen;
 
+    [SerializeField]
+    private GameObject text;
+
 
     private bool figuringPuzzle=false;
     private bool nearby = false;
@@ -58,6 +61,7 @@ public class DoorPuzzle : MonoBehaviour
         {
             image.enabled = false;
         }
+        text.SetActive(false);
     }
 
     private void ThirdCircle_Event_OnCircleNotZero(object sender, System.EventArgs e)
@@ -162,6 +166,7 @@ public class DoorPuzzle : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             nearby = true;
+            text.gameObject.SetActive(true);
         }
     }
 
@@ -170,6 +175,7 @@ public class DoorPuzzle : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             nearby = false;
+            text.gameObject.SetActive(false);
         }
     }
 

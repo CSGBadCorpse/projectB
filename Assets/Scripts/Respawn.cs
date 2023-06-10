@@ -20,6 +20,14 @@ public class Respawn : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ResetLevel();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player"))

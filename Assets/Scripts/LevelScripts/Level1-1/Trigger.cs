@@ -29,7 +29,7 @@ public class Trigger : MonoBehaviour
     private void Update()
     {
         // 按下f键时开始旋转
-        if (Input.GetKeyDown(KeyCode.F) && !isRotating)
+        if (Input.GetKeyDown(KeyCode.F) && !isRotating && enter)
         {
             isRotating = true;
             rotationAxis = Vector3.forward;
@@ -53,7 +53,7 @@ public class Trigger : MonoBehaviour
             }
 
             // 绕着B的z轴旋转
-            objectA.transform.RotateAround(objectB.transform.position, rotationAxis, angle);
+            objectA.transform.RotateAround(objectB.transform.position, -rotationAxis, angle);
             //绕着D的z轴旋转
             objectC.transform.RotateAround(objectD.transform.position, rotationAxis, angle1);
 

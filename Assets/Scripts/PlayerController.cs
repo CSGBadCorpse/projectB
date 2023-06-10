@@ -99,8 +99,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(localTransform.position-new Vector3(localTransform.position.x, localTransform.position.y- localTransform.localScale.y/2, localTransform.position.z), Vector2.down * (playerHeight * 0.5f + jumpDistance), Color.red);
-        bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), playerHeight * 0.5f + jumpDistance, groundLayer);
+        Debug.DrawRay(localTransform.position, Vector2.down * (jumpDistance), Color.red);
+        //bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), playerHeight * 0.5f + jumpDistance, groundLayer);
+        bool hit = Physics.Raycast(localTransform.position, localTransform.TransformDirection(Vector3.down), jumpDistance, groundLayer);
         if (hit)
         {
             isOnGround = true;
@@ -172,15 +173,18 @@ public class PlayerController : MonoBehaviour
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
+            //Debug.Log("Horizontal: " + rb.velocity.x + " Vertical: " + rb.velocity.z);
             
             if (horizontal >= offset || vertical >= offset || horizontal<=-offset || vertical <= -offset) 
             {
+                animator.SetFloat("Speed", Math.Abs(rb.velocity.magnitude));
                 moveDir = new Vector3(horizontal, 0, vertical);
                 localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x,0,moveDir.z), rotationSpeed * Time.deltaTime);
             }
             else
             {
                 moveDir = Vector3.zero;
+                animator.SetFloat("Speed", 0);
             }
             
         }

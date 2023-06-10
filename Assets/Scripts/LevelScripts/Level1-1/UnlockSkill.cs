@@ -18,7 +18,7 @@ public class UnlockSkill : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("Enter");
+            //Debug.Log("Enter");
             text.gameObject.SetActive(true);
             PlayerController.Instance.hasChangeSpaceSkill = true;
         }

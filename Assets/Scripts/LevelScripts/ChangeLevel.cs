@@ -43,8 +43,15 @@ public class ChangeLevel : MonoBehaviour
         }
         if (scene.name == "Level2-2")
         {
-            Debug.Log("123");
             PlayerController.Instance.hasChangeSpaceSkill = true;
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
     private void OnTriggerEnter(Collider other)
