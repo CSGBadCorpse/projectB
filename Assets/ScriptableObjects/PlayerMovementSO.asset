@@ -23,4 +23,4 @@ MonoBehaviour:
   offset: 0.3
   rotationSpeed: 7
   groundDrag: 12
-  triggerName: TriggerStick
+  triggerTagName: TriggerStick

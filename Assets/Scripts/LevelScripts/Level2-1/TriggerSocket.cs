@@ -25,7 +25,7 @@ public class TriggerSocket : MonoBehaviour
 
     private void Player_Event_ActivateTriggers(object sender, System.EventArgs e)
     {
-        if (approachTrigger)
+        if (approachTrigger&&!TimeController.Instance.IsNow())
         {
             if (PlayerController.Instance.HasTrigger())
             {

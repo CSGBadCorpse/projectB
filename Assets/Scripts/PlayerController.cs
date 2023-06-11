@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         offset = playerMovemenSO.offset;
         rotationSpeed = playerMovemenSO.rotationSpeed;
         groundDrag = playerMovemenSO.groundDrag;
-        triggerName = playerMovemenSO.triggerName;
+        triggerName = playerMovemenSO.triggerTagName;
 
         pickUpStick = false;
 
@@ -225,8 +225,8 @@ public class PlayerController : MonoBehaviour
 
     public void Fix2DPosition()//2d模式下的移动轴和3d模式下的移动轴不在一条轴上
     {
-        localTransform.rotation = Quaternion.identity;
-        localTransform.forward = localTransform.right;
+        //localTransform.rotation = Quaternion.identity;
+        //localTransform.forward = localTransform.right;
         trans.position = new Vector3(trans.position.x, trans.position.y, -1);
     }
     public void Fix3DPosition()//因为只需要执行一次，在切换到3D时执行一次
@@ -242,5 +242,11 @@ public class PlayerController : MonoBehaviour
     public bool HasTrigger()
     {
         return pickUpStick;
+    }
+
+    public void EmptyRidibodyVelocity()
+    {
+        rb.velocity = Vector3.zero;
+        animator.SetFloat("Speed", 0f);
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
-    [SerializeField] private Button quitButton;
+    //[SerializeField] private Button quitButton;
 
     private void Awake()
     {
@@ -16,10 +16,10 @@ public class MainMenuUI : MonoBehaviour
             //Loader.Load(Loader.Scene.GameScene);
             SceneManager.LoadScene("LoadingPage");
         });
-        quitButton.onClick.AddListener(() =>
+        /*quitButton.onClick.AddListener(() =>
         {
             Application.Quit();
-        });
+        });*/
         Time.timeScale = 1f;
     }
 }
