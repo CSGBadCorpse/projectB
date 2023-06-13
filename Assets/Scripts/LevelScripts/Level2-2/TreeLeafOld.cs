@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TreeLeafOld : MonoBehaviour
@@ -128,14 +129,25 @@ public class TreeLeafOld : MonoBehaviour
         boxCollider.enabled = true;
     }
 
-   /* public float GetStandTime()
-    {
-        return standTime;
-    }
+    /* public float GetStandTime()
+     {
+         return standTime;
+     }
 
-    public float GetCurrentTimer()
+     public float GetCurrentTimer()
+     {
+         return currentTime;
+     }*/
+    private GUIStyle _tabStyle;
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
     {
-        return currentTime;
-    }*/
+        _tabStyle = new GUIStyle();
+        _tabStyle.alignment = TextAnchor.MiddleLeft;
+        _tabStyle.fontSize = 16;
+        _tabStyle.normal.textColor = Color.blue;
+        Handles.Label(this.transform.position, "TreeOld: " + standTime + "/" + currentTime.ToString("f2"), _tabStyle);
+    }
+#endif
 
 }
