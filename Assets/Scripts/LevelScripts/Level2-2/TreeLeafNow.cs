@@ -131,7 +131,7 @@ public class TreeLeafNow : MonoBehaviour
         _tabStyle.alignment = TextAnchor.MiddleLeft;
         _tabStyle.fontSize = 16;
         _tabStyle.normal.textColor = Color.red;
-        Handles.Label(this.transform.position-new Vector3(0,1,0), "TreeNow: " + standTime + "/" + currentTime.ToString("f2"),_tabStyle);
+        Handles.Label(this.transform.position-new Vector3(0,1,0), "TreeNow: " + standTime + "/" + currentTime.ToString("f1"),_tabStyle);
     }
 #endif
 }
