@@ -18,6 +18,8 @@ public class TreeLeafOld : MonoBehaviour
     private bool startCountDown;
     private float currentTime;
 
+    private bool touchedLeaf;
+
     public float CurrentTime
     {
         get { return currentTime; }
@@ -37,22 +39,28 @@ public class TreeLeafOld : MonoBehaviour
         boxCollider = this.GetComponent<BoxCollider>();
         Respawn.Instance.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         DisableSelf();
+        touchedLeaf = false;
     }
 
     private void TimeController_Event_OnTimeChanged(object sender, System.EventArgs e)
     {
         //时空切换
-        if (TimeController.Instance.IsNow())
+        if (TimeController.Instance.IsNow())//现在时空
         {
             startCountDown = false;
             DisableSelf();
         }
-        else if (!TimeController.Instance.IsNow())
+        else if (!TimeController.Instance.IsNow())//旧时空
         {
             //startCountDown = false;
-            if (nowLeaf.GetComponent<TreeLeafNow>().CurrentTime > 0)
+            float nowLeafStandCurrentTime = nowLeaf.GetComponent<TreeLeafNow>().CurrentTime;
+            if (nowLeafStandCurrentTime > 0 && nowLeafStandCurrentTime >= standTime && currentTime != standTime)
             {
                 currentTime = standTime - (nowLeaf.GetComponent<TreeLeafNow>().StandTime - nowLeaf.GetComponent<TreeLeafNow>().CurrentTime);
+            }
+            else if(nowLeafStandCurrentTime > 0 && nowLeafStandCurrentTime < standTime && currentTime!=standTime)
+            {
+                currentTime = standTime - nowLeaf.GetComponent<TreeLeafNow>().CurrentTime;
             }
             EnableSelf();
         }
@@ -65,6 +73,10 @@ public class TreeLeafOld : MonoBehaviour
 
     private void Update()
     {
+        if(touchedLeaf && PlayerController.Instance.IsOnGround)
+        {
+            startCountDown = true;
+        }
         if (TimeController.Instance.IsNow())
         {
             startCountDown = false;
@@ -88,7 +100,7 @@ public class TreeLeafOld : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            startCountDown = true;
+            touchedLeaf = true;
         }
     }
 
@@ -96,6 +108,7 @@ public class TreeLeafOld : MonoBehaviour
     {
         currentTime = 0;
         startCountDown = false;
+        touchedLeaf = false;
         EnableSelf();
     }
 
@@ -115,7 +128,7 @@ public class TreeLeafOld : MonoBehaviour
         boxCollider.enabled = true;
     }
 
-    public float GetStandTime()
+   /* public float GetStandTime()
     {
         return standTime;
     }
@@ -123,6 +136,6 @@ public class TreeLeafOld : MonoBehaviour
     public float GetCurrentTimer()
     {
         return currentTime;
-    }
+    }*/
 
 }
