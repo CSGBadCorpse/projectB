@@ -30,9 +30,6 @@ public class TimeController : MonoBehaviour
     [SerializeField]
     private float disappearSpeed;
 
-    [SerializeField]
-    private Animator animator;
-
 
     private bool switchTime;
     private TimeMode time;
@@ -58,7 +55,6 @@ public class TimeController : MonoBehaviour
         switchTime = Input.GetKeyDown(KeyCode.R);//切换时空技能键
         if (switchTime)//在这里写一个判断开门动画是否完成的判断条件（可以写一个动画管理器判断所有的动画是否完成播放）
         {
-            animator.SetTrigger("Triggered");
             if (time == TimeMode.Old)
             {
                 time = TimeMode.Now;

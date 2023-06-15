@@ -18,37 +18,18 @@ public class Trigger : MonoBehaviour
     private float rotationAngle = 180f; // 旋转角度
     private float rotationAngle1 = 90f; // 旋转角度
 
-    [SerializeField]
-    [Header("2D操作出发区域")]
-    private Entered enterArea;
-
     private bool enter;
-    private bool area2DEnter;
 
     private void Start()
     {
         enter = false;
-        area2DEnter = false;
         objectC.transform.RotateAround(objectD.transform.position, rotationAxis, 180f);
-        enterArea.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (enterArea.entered)
-        {
-            area2DEnter = true;
-        }
-        if (CameraController.Instance.Is2DGame())
-        {
-            enterArea.gameObject.SetActive(true);
-        }
-        else if (CameraController.Instance.Is3DGame())
-        {
-            enterArea.gameObject.SetActive(false);
-        }
         // 按下f键时开始旋转
-        if (Input.GetKeyDown(KeyCode.F) && !isRotating && (enter || area2DEnter))
+        if (Input.GetKeyDown(KeyCode.F) && !isRotating && enter)
         {
             isRotating = true;
             rotationAxis = Vector3.forward;

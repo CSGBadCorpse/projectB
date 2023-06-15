@@ -41,7 +41,6 @@ public class CameraController : MonoBehaviour
         switchMode = Input.GetKeyDown(KeyCode.Tab);//切换视角技能键
         if (switchMode && ViewChange.Instance.IsChangeFinished() && PlayerController.Instance.hasChangeSpaceSkill)
         {
-            PlayerController.Instance.EmptyRidibodyVelocity();
             if (virtualCamera.Priority > 2)//如果是3d就切换回2d
             {
                 globalLight.GetComponent<Light>().shadows = LightShadows.None;//2d情况把阴影消除

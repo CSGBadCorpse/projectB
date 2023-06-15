@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class TreeLeafNow : MonoBehaviour
 {
@@ -19,8 +18,6 @@ public class TreeLeafNow : MonoBehaviour
 
     private bool startCountDown;
     private float currentTime;
-
-    private bool touchedLeaf;
 
     public float CurrentTime
     {
@@ -41,21 +38,20 @@ public class TreeLeafNow : MonoBehaviour
         boxCollider = this.GetComponent<BoxCollider>();
         Respawn.Instance.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         EnableSelf();
-        touchedLeaf = false;
     }
 
     private void TimeController_Event_OnTimeChanged(object sender, System.EventArgs e)
     {
         //时空切换
-        if (TimeController.Instance.IsNow())//现在时空
+        if (TimeController.Instance.IsNow())
         {
-            if (oldLeaf.GetComponent<TreeLeafOld>().CurrentTime > 0 && currentTime!=standTime)
+            if (oldLeaf.GetComponent<TreeLeafOld>().CurrentTime > 0)
             {
-                currentTime = oldLeaf.GetComponent<TreeLeafOld>().CurrentTime;
+                currentTime = standTime - oldLeaf.GetComponent<TreeLeafOld>().CurrentTime;
             }
             EnableSelf();
         }
-        else if (!TimeController.Instance.IsNow())//旧时空
+        else if (!TimeController.Instance.IsNow())
         {
             startCountDown = false;
             DisableSelf();
@@ -69,10 +65,7 @@ public class TreeLeafNow : MonoBehaviour
 
     private void Update()
     {
-        if (touchedLeaf && PlayerController.Instance.IsOnGround)
-        {
-            startCountDown = true;
-        }
+
         if (TimeController.Instance.IsNow())
         {
             EnableSelf();
@@ -98,9 +91,9 @@ public class TreeLeafNow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Player") && PlayerController.Instance.IsOnGround)
+        if (collision.transform.CompareTag("Player"))
         {
-            touchedLeaf = true;
+            startCountDown = true;
         }
     }
 
@@ -108,8 +101,8 @@ public class TreeLeafNow : MonoBehaviour
     {
         currentTime = 0;
         startCountDown = false;
-        EnableSelf();
-        touchedLeaf = false;
+        meshRenderer.enabled = true;
+        boxCollider.enabled = true;
     }
     private void DisableSelf()
     {
@@ -123,15 +116,9 @@ public class TreeLeafNow : MonoBehaviour
         boxCollider.enabled = true;
     }
 
-    private GUIStyle _tabStyle;
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
+
+    public float GetStandTime()
     {
-        _tabStyle = new GUIStyle();
-        _tabStyle.alignment = TextAnchor.MiddleLeft;
-        _tabStyle.fontSize = 16;
-        _tabStyle.normal.textColor = Color.red;
-        Handles.Label(this.transform.position-new Vector3(0,1,0), "TreeNow: " + standTime + "/" + currentTime.ToString("f1"),_tabStyle);
+        return standTime;
     }
-#endif
 }

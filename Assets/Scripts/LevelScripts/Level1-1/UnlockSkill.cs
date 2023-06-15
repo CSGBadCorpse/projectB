@@ -9,18 +9,35 @@ public class UnlockSkill : MonoBehaviour
     [SerializeField]
     private GameObject text;
 
+    [SerializeField]
+    private PlayerController controller;
+    [SerializeField]
+    private RotationBird birdMove;
+
     private void Start()
     {
         text.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            //controller.enabled = true;
+            birdMove.ReturnPosition();
+            //birdMove.enabled = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Player")&&!PlayerController.Instance.hasChangeSpaceSkill)
         {
-            //Debug.Log("Enter");
             text.gameObject.SetActive(true);
             PlayerController.Instance.hasChangeSpaceSkill = true;
+            PlayerController.Instance.SetAnimatorStop();
+            controller.enabled = false;
+            birdMove.enabled = true;
         }
     }
     private void OnTriggerExit(Collider other)

@@ -37,10 +37,6 @@ public class PlayerController : MonoBehaviour
 
     private float playerHeight;
     private bool isOnGround;
-    public bool IsOnGround
-    {
-        get { return isOnGround; }
-    }
     /*[SerializeField]
     [Header("环境检测")]*/
     //用来判断哪一个是地面的图层
@@ -68,6 +64,13 @@ public class PlayerController : MonoBehaviour
     private bool pickUpStick;
 
     public bool hasChangeSpaceSkill;
+
+    [SerializeField]
+    [Header("鸟的位置")]
+    private Transform birdPosition;
+    [SerializeField]
+    [Header("相对位置")]
+    private Transform relativePosition;
     
 
 
@@ -184,6 +187,10 @@ public class PlayerController : MonoBehaviour
                 animator.SetFloat("Speed", Math.Abs(rb.velocity.magnitude));
                 moveDir = new Vector3(horizontal, 0, vertical);
                 localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x,0,moveDir.z), rotationSpeed * Time.deltaTime);
+                birdPosition.position= relativePosition.position;
+                birdPosition.forward = localTransform.forward;
+
+
             }
             else
             {
@@ -202,6 +209,8 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", Math.Abs(horizontal));
             moveDir = new Vector3(horizontal, 0, 0);
             localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x, 0, moveDir.z), rotationSpeed * Time.deltaTime);
+            birdPosition.position = relativePosition.position;
+            birdPosition.forward = localTransform.forward;
         }
         
     }
@@ -229,8 +238,8 @@ public class PlayerController : MonoBehaviour
 
     public void Fix2DPosition()//2d模式下的移动轴和3d模式下的移动轴不在一条轴上
     {
-        //localTransform.rotation = Quaternion.identity;
-        //localTransform.forward = localTransform.right;
+        localTransform.rotation = Quaternion.identity;
+        localTransform.forward = localTransform.right;
         trans.position = new Vector3(trans.position.x, trans.position.y, -1);
     }
     public void Fix3DPosition()//因为只需要执行一次，在切换到3D时执行一次
@@ -248,9 +257,8 @@ public class PlayerController : MonoBehaviour
         return pickUpStick;
     }
 
-    public void EmptyRidibodyVelocity()
+    public void SetAnimatorStop()
     {
-        rb.velocity = Vector3.zero;
-        animator.SetFloat("Speed", 0f);
+        animator.SetFloat("Speed",0);
     }
 }
