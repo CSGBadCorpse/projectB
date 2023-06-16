@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RotateType
+{
+    skill,
+    trigger
+}
+
 public class RotationBird : MonoBehaviour
 {
     [SerializeField]
+    [Header("子物体")]
+    private Transform subTrans;
+    [SerializeField]
     [Header("围绕点")]
-    private Transform target;
+    private Transform m_target;
     [SerializeField]
     [Header("原位")]
     private Transform originPos;
@@ -17,7 +26,19 @@ public class RotationBird : MonoBehaviour
     public float speed = 5f;
     public float targetRotationY = 90f;
 
+
+
     private Vector3 targetDirection;
+
+    private bool rotate = true;
+
+    private RotateType m_rotateType;
+
+    private void Start()
+    {
+        
+    }
+
 
     // 旋转动画协程
     IEnumerator RotateToOriginPosition()
@@ -40,6 +61,8 @@ public class RotationBird : MonoBehaviour
         }
 
         // 取消当前脚本的激活状态
+        transform.rotation = Quaternion.identity;
+        //subTrans.rotation = Quaternion.identity;
         this.enabled = false;
         controller.enabled = true;
     }
@@ -48,13 +71,45 @@ public class RotationBird : MonoBehaviour
     {
         if (!returnPos)
         {
-            Vector3 relativePos = (target.position + new Vector3(0, -.4f, 0)) - transform.position;
+            Quaternion rotation = Quaternion.identity;
+            if (m_rotateType == RotateType.trigger)
+            {
+                if (rotate)
+                {
+                    /*Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y,  -90);
+                    float t = 0.5f; // 这里设定插值参数为0.5，可以根据需要自行调整
+                    subTrans.rotation = Quaternion.Slerp(subTrans.rotation, newRotation, t);*/
+                    Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, -90);
+                    subTrans.rotation = newRotation;
+                    rotate = false;
+                }
+            }
+            if(m_rotateType == RotateType.skill)
+            {
+                Vector3 relativePos = (m_target.position + new Vector3(0, -0.4f, 0)) - transform.position;
+                rotation = Quaternion.LookRotation(relativePos, new Vector3(0, 1, 0));
+            }
+            if(m_rotateType == RotateType.trigger)
+            {
+                Vector3 relativePos = (m_target.position) - transform.position;
+                rotation = Quaternion.LookRotation(relativePos,new Vector3(0,0,-1));
+            }
 
-            Quaternion rotation = Quaternion.LookRotation(relativePos);
+
+            
             Quaternion current = transform.localRotation;
 
             transform.localRotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
-            transform.Translate(0, 0, 3 * Time.deltaTime);
+            
+            if(m_rotateType == RotateType.skill)
+            {
+                transform.Translate(0, 0, 3 * Time.deltaTime);
+            }
+            if(m_rotateType == RotateType.trigger)
+            {
+                transform.Translate(0, 0, 3 * Time.deltaTime);
+            }
+            
         }
         else if (returnPos)
         {
@@ -89,5 +144,14 @@ public class RotationBird : MonoBehaviour
     public void ReturnPosition()
     {
         returnPos = true;
+    }
+
+    public void SetRotateType(RotateType rotateType)
+    {
+        m_rotateType = rotateType;
+    }
+    public void SetRotateTarget(Transform target)
+    {
+        m_target = target;
     }
 }

@@ -10,6 +10,9 @@ public class UnlockSkill : MonoBehaviour
     private GameObject text;
 
     [SerializeField]
+    private Transform orientationPoint;
+
+    [SerializeField]
     private PlayerController controller;
     [SerializeField]
     private RotationBird birdMove;
@@ -38,6 +41,8 @@ public class UnlockSkill : MonoBehaviour
             PlayerController.Instance.SetAnimatorStop();
             controller.enabled = false;
             birdMove.enabled = true;
+            birdMove.SetRotateTarget(orientationPoint);
+            birdMove.SetRotateType(RotateType.skill);
         }
     }
     private void OnTriggerExit(Collider other)
