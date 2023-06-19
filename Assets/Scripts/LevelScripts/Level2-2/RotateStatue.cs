@@ -21,8 +21,12 @@ public class RotateStatue : MonoBehaviour
 
     private bool enableRotate;
     //private bool activate;
+<<<<<<< HEAD
     [SerializeField]
     public bool activate;
+=======
+    public bool activate { get; private set; }
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
 
     private bool finalDoorOpened;
 
@@ -70,7 +74,10 @@ public class RotateStatue : MonoBehaviour
                 statue.Rotate(0, 90, 0);
             }
         }
+<<<<<<< HEAD
         Debug.Log(this.gameObject.name + " : " + statue.eulerAngles.y);
+=======
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
         if(statue.eulerAngles.y == GetRotationFromEnum(targetRotation))
         {
             activate = true;

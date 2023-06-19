@@ -54,7 +54,11 @@ public class CameraController : MonoBehaviour
             }
             else if (virtualCamera.Priority < 2)//如果是2d就切换回3d
             {
+<<<<<<< HEAD
                 globalLight.GetComponent<Light>().shadows = LightShadows.None;
+=======
+                globalLight.GetComponent<Light>().shadows = LightShadows.Soft;
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
                 virtualCamera.Priority = 3;
                 //virtualCamera.m_Lens.FieldOfView = 80f;
                 ViewChange.Instance.ChangeProjection = true;

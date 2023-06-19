@@ -856,6 +856,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7897984958800064962}
   - component: {fileID: 7643169338211017206}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 7643169338211017204}
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
   m_Layer: 0
   m_Name: bird
   m_TagString: Untagged
@@ -870,7 +874,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7408588328579607416}
+<<<<<<< HEAD
   m_LocalRotation: {x: 0, y: 0.7031962, z: 0, w: 0.71099585}
+=======
+  m_LocalRotation: {x: -0, y: 0.70319825, z: -0, w: 0.7109938}
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
   m_LocalPosition: {x: -1.17, y: 2.277, z: -0.5}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
@@ -900,6 +908,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< HEAD
+=======
+--- !u!114 &7643169338211017204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408588328579607416}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2436cf4f8f144e246b6155ccde308d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
 --- !u!1 &7846764547599136658
 GameObject:
   m_ObjectHideFlags: 0

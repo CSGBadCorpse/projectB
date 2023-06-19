@@ -28,6 +28,7 @@ public class DoorPuzzle : MonoBehaviour
     [SerializeField]
     private List<RawImage> circles;
     [SerializeField]
+<<<<<<< HEAD
     private List<RawImage> oldCircles;
     [SerializeField]
     private List<RawImage> backgroundPics;
@@ -35,6 +36,12 @@ public class DoorPuzzle : MonoBehaviour
     [SerializeField]
     private GameObject triggerButton;
 
+=======
+    private GameObject oldDoorOpen;
+
+    [SerializeField]
+    private GameObject text;
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
 
 
     private bool figuringPuzzle=false;
@@ -64,11 +71,15 @@ public class DoorPuzzle : MonoBehaviour
         {
             image.enabled = false;
         }
+<<<<<<< HEAD
         foreach (RawImage image in oldCircles)
         {
             image.enabled = false;
         }
         triggerButton.gameObject.SetActive(false);
+=======
+        text.SetActive(false);
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
     }
 
     private void ThirdCircle_Event_OnCircleNotZero(object sender, System.EventArgs e)
@@ -130,11 +141,18 @@ public class DoorPuzzle : MonoBehaviour
         //Debug.Log("SecondCircle: " + secondCircle);
         //Debug.Log("ThirdCircle: " + thirdCircle);
 
+<<<<<<< HEAD
         if (firstCircle && secondCircle && thirdCircle && TimeController.Instance.IsNow())
         {
             figuringPuzzle = false;
             //oldDoorOpen.SetActive(false);
             
+=======
+        if (firstCircle && secondCircle && thirdCircle)
+        {
+            figuringPuzzle = false;
+            oldDoorOpen.SetActive(false);
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
             animator.SetTrigger(PUZZLE_FIXED);
             StartCoroutine(ShowPlayer());
             //puzzleState = PuzzleState.Solved;
@@ -148,6 +166,7 @@ public class DoorPuzzle : MonoBehaviour
     IEnumerator HidePlayerDelay()
     {
         yield return new WaitForSeconds(2f);
+<<<<<<< HEAD
         player.SetActive(false); 
 
         foreach (RawImage image in backgroundPics)
@@ -175,21 +194,34 @@ public class DoorPuzzle : MonoBehaviour
                 image.enabled = true;
             }
         }
+=======
+        player.SetActive(false);
+        foreach (RawImage image in circles)
+        {
+            image.enabled = true;
+        }
+
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
     }
     IEnumerator ShowPlayer()
     {
         yield return new WaitForSeconds(2f);
         firstCircle = false;
         secondCircle = false;
+<<<<<<< HEAD
         thirdCircle = false;
         foreach (RawImage image in backgroundPics)
         {
             image.enabled = false;
         }
+=======
+        thirdCircle = false;        
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
         foreach (RawImage image in circles)
         {
             image.enabled = false;
         }
+<<<<<<< HEAD
         foreach (RawImage image in oldCircles)
         {
             image.enabled = false;
@@ -197,6 +229,10 @@ public class DoorPuzzle : MonoBehaviour
         player.SetActive(true);
         
 
+=======
+        player.SetActive(true);
+ 
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
     }
 
     private void OnTriggerEnter(Collider other)
@@ -204,7 +240,11 @@ public class DoorPuzzle : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             nearby = true;
+<<<<<<< HEAD
             triggerButton.gameObject.SetActive(true);
+=======
+            text.gameObject.SetActive(true);
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
         }
     }
 
@@ -213,7 +253,11 @@ public class DoorPuzzle : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             nearby = false;
+<<<<<<< HEAD
             triggerButton.gameObject.SetActive(false);
+=======
+            text.gameObject.SetActive(false);
+>>>>>>> c453743883466631bae7c117d56be9f463e542ea
         }
     }
 
