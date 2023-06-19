@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - TriggerStick
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -12,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
+  - 
   - 
   - 
   - 
@@ -39,26 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 3823618695
-    locked: 0
-<<<<<<< HEAD
-  - name: Default2
-    uniqueID: 1575197743
-=======
-  - name: Default
-    uniqueID: 0
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
-    locked: 0
-  - name: Foreground
-    uniqueID: 1775517237
-    locked: 0
-<<<<<<< HEAD
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Particles
-    uniqueID: 3333792009
-    locked: 0
-=======
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
