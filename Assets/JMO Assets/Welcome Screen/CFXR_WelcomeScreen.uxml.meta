@@ -4,11 +4,7 @@ ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 2
-<<<<<<< HEAD
   userData: dontshow
-=======
-  userData: 
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 13804, guid: 0000000000000000e000000000000000, type: 0}

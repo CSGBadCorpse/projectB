@@ -1,9 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
-using UnityEditor.UIElements;
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
 using UnityEngine;
 
 [CreateAssetMenu()]

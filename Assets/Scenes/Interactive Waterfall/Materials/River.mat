@@ -8,12 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: River
-<<<<<<< HEAD
   m_Shader: {fileID: -6465566751694194690, guid: f9f858aa8a660f4448d32f50f6c43d95, type: 3}
-=======
-  m_Shader: {fileID: -6465566751694194690, guid: f9f858aa8a660f4448d32f50f6c43d95,
-    type: 3}
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -68,13 +63,8 @@ Material:
     - radiusGradient: 0.146
     - watergap: 0
     m_Colors:
-<<<<<<< HEAD
     - BaseColor: {r: 0.060742244, g: 0.11223527, b: 0.3679245, a: 1}
     - NoiseColor: {r: 0.6518994, g: 0.8691992, b: 0.6867154, a: 0.0627451}
-=======
-    - BaseColor: {r: 0, g: 0.15604067, b: 1, a: 0}
-    - NoiseColor: {r: 0.123474486, g: 2.37969, b: 0.4748344, a: 0}
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
     - _playerDistance: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6695124551748313235

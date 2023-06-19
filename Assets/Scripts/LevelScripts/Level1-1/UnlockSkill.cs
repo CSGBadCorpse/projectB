@@ -42,11 +42,7 @@ public class UnlockSkill : MonoBehaviour
             controller.enabled = false;
             birdMove.enabled = true;
             birdMove.SetRotateTarget(orientationPoint);
-<<<<<<< HEAD
             birdMove.SetRotateType(RotateType.trigger);
-=======
-            birdMove.SetRotateType(RotateType.skill);
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
         }
     }
     private void OnTriggerExit(Collider other)

@@ -19,11 +19,8 @@ public class Trigger : MonoBehaviour
     private float rotationAngle1 = 90f; // 旋转角度
 
     private bool enter;
-<<<<<<< HEAD
     [SerializeField]
     private Entered enteredIn2D;
-=======
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
 
     private void Start()
     {
@@ -34,11 +31,7 @@ public class Trigger : MonoBehaviour
     private void Update()
     {
         // 按下f键时开始旋转
-<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.F) && !isRotating && (enter || enteredIn2D.entered)) 
-=======
-        if (Input.GetKeyDown(KeyCode.F) && !isRotating && enter)
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
         {
             isRotating = true;
             rotationAxis = Vector3.forward;

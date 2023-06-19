@@ -36,14 +36,10 @@ public class RotationBird : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD
         if (m_target == null)
         {
             m_target = transform;
         }
-=======
-        
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
     }
 
 
@@ -68,13 +64,9 @@ public class RotationBird : MonoBehaviour
         }
 
         // 取消当前脚本的激活状态
-<<<<<<< HEAD
         Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, 0);
         subTrans.rotation = newRotation;
         //transform.rotation = Quaternion.identity;
-=======
-        transform.rotation = Quaternion.identity;
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
         //subTrans.rotation = Quaternion.identity;
         this.enabled = false;
         controller.enabled = true;
@@ -126,11 +118,8 @@ public class RotationBird : MonoBehaviour
         }
         else if (returnPos)
         {
-<<<<<<< HEAD
             Quaternion newRotation2 = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, 0);
             subTrans.rotation = newRotation2;
-=======
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
             // 计算物体与目标点之间的向量
             Vector3 direction = originPos.position - transform.position;
 

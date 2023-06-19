@@ -37,13 +37,10 @@ public class PlayerController : MonoBehaviour
 
     private float playerHeight;
     private bool isOnGround;
-<<<<<<< HEAD
     public bool IsOnGround
     {
         get { return isOnGround; }
     }
-=======
->>>>>>> c453743883466631bae7c117d56be9f463e542ea
     /*[SerializeField]
     [Header("环境检测")]*/
     //用来判断哪一个是地面的图层
