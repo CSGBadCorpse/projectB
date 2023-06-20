@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum RotateType
 {
-    skill,
+    skill_Space,
+    skill_Time,
     trigger
 }
 
@@ -21,7 +22,8 @@ public class RotationBird : MonoBehaviour
     private Transform originPos;
     [SerializeField]
     private PlayerController controller;
-    private bool returnPos = false;
+    [HideInInspector]
+    public bool returnPos = false;
 
     public float speed = 5f;
     public float targetRotationY = 90f;
@@ -76,44 +78,79 @@ public class RotationBird : MonoBehaviour
     {
         if (!returnPos)
         {
-            Quaternion rotation = Quaternion.identity;
-            if (m_rotateType == RotateType.trigger)
+            if(m_rotateType == RotateType.trigger)
             {
-                if (rotate)
+                Quaternion newRotation2 = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, 0);
+                subTrans.rotation = newRotation2;
+                // 计算物体与目标点之间的向量
+                Vector3 direction = m_target.position - transform.position;
+
+                Debug.Log("rotation:" + direction.magnitude);
+                // 如果距离小于一个阈值，则认为已到达目标点
+                if (direction.magnitude < 0.01f)
                 {
-                    /*Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y,  -90);
-                    float t = 0.5f; // 这里设定插值参数为0.5，可以根据需要自行调整
-                    subTrans.rotation = Quaternion.Slerp(subTrans.rotation, newRotation, t);*/
-                    Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, -90);
-                    subTrans.rotation = newRotation;
-                    rotate = false;
+                    subTrans.rotation = Quaternion.Euler(0,90,0) ;
+                    return;
+                }
+                // 计算物体需要旋转的角度，使用Quaternion.LookRotation计算目标旋转
+                targetDirection = direction.normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+                // 根据物体朝向目标点的方向和移动速度计算移动的距离
+                float remainingDistance = direction.magnitude;
+                Vector3 moveDistance = targetDirection * speed * Time.deltaTime;
+
+                // 使用RotateTowards方法来平滑地旋转物体。
+                Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360f * Time.deltaTime);
+                transform.rotation = newRotation;
+
+                // 移动物体
+                transform.Translate(moveDistance, Space.World);
+
+
+            }
+            else
+            {
+                Quaternion rotation = Quaternion.identity;
+                if (m_rotateType == RotateType.skill_Time)
+                {
+                    if (rotate)
+                    {
+                        /*Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y,  -90);
+                        float t = 0.5f; // 这里设定插值参数为0.5，可以根据需要自行调整
+                        subTrans.rotation = Quaternion.Slerp(subTrans.rotation, newRotation, t);*/
+                        Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, -90);
+                        subTrans.rotation = newRotation;
+                        rotate = false;
+                    }
+                }
+                if (m_rotateType == RotateType.skill_Space)
+                {
+                    Vector3 relativePos = (m_target.position + new Vector3(0, -0.4f, 0)) - transform.position;
+                    rotation = Quaternion.LookRotation(relativePos, new Vector3(0, 1, 0));
+                }
+                if (m_rotateType == RotateType.skill_Time)
+                {
+                    Vector3 relativePos = (m_target.position) - transform.position;
+                    rotation = Quaternion.LookRotation(relativePos, new Vector3(0, 0, -1));
+                }
+
+
+
+                Quaternion current = transform.localRotation;
+
+                transform.localRotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
+
+                if (m_rotateType == RotateType.skill_Space)
+                {
+                    transform.Translate(0, 0, 3 * Time.deltaTime);
+                }
+                if (m_rotateType == RotateType.skill_Time)
+                {
+                    transform.Translate(0, 0, 3 * Time.deltaTime);
                 }
             }
-            if(m_rotateType == RotateType.skill)
-            {
-                Vector3 relativePos = (m_target.position + new Vector3(0, -0.4f, 0)) - transform.position;
-                rotation = Quaternion.LookRotation(relativePos, new Vector3(0, 1, 0));
-            }
-            if(m_rotateType == RotateType.trigger)
-            {
-                Vector3 relativePos = (m_target.position) - transform.position;
-                rotation = Quaternion.LookRotation(relativePos,new Vector3(0,0,-1));
-            }
-
-
             
-            Quaternion current = transform.localRotation;
-
-            transform.localRotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
-            
-            if(m_rotateType == RotateType.skill)
-            {
-                transform.Translate(0, 0, 3 * Time.deltaTime);
-            }
-            if(m_rotateType == RotateType.trigger)
-            {
-                transform.Translate(0, 0, 3 * Time.deltaTime);
-            }
             
         }
         else if (returnPos)

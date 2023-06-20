@@ -14,6 +14,10 @@ public class Trigger : MonoBehaviour
     public float rotationSpeed1; // 旋转速度1
 
     private bool isRotating; // 是否正在旋转
+    public bool IsRotating
+    {
+        get { return isRotating; }
+    }
     private Vector3 rotationAxis = Vector3.forward; // 旋转轴向
     private float rotationAngle = 180f; // 旋转角度
     private float rotationAngle1 = 90f; // 旋转角度

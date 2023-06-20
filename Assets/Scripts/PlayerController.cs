@@ -75,8 +75,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Header("相对位置")]
     private Transform relativePosition;
-    
 
+    private bool birdMovetoTrigger;
 
     private void Awake()
     {
@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        birdMovetoTrigger = false;
         jumpForce = playerMovemenSO.jumpForce;
         jumpCooldown = playerMovemenSO.jumpCooldown;
         airMultiplier = playerMovemenSO.airMultiplier;
@@ -191,10 +192,11 @@ public class PlayerController : MonoBehaviour
                 animator.SetFloat("Speed", Math.Abs(rb.velocity.magnitude));
                 moveDir = new Vector3(horizontal, 0, vertical);
                 localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x,0,moveDir.z), rotationSpeed * Time.deltaTime);
-                birdPosition.position= relativePosition.position;
-                birdPosition.forward = localTransform.forward;
-
-
+                if (!birdMovetoTrigger)
+                {
+                    birdPosition.position = relativePosition.position;
+                    birdPosition.forward = localTransform.forward;
+                }
             }
             else
             {
@@ -213,8 +215,11 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", Math.Abs(horizontal));
             moveDir = new Vector3(horizontal, 0, 0);
             localTransform.forward = Vector3.Slerp(localTransform.forward, new Vector3(moveDir.x, 0, moveDir.z), rotationSpeed * Time.deltaTime);
-            birdPosition.position = relativePosition.position;
-            birdPosition.forward = localTransform.forward;
+            if (!birdMovetoTrigger)
+            {
+                birdPosition.position = relativePosition.position;
+                birdPosition.forward = localTransform.forward;
+            }
         }
         
     }
@@ -264,5 +269,13 @@ public class PlayerController : MonoBehaviour
     public void SetAnimatorStop()
     {
         animator.SetFloat("Speed",0);
+    }
+    public void TriggerDisable()
+    {
+        birdMovetoTrigger = true;
+    }
+    public void TriggerEnable()
+    {
+        birdMovetoTrigger = false;
     }
 }

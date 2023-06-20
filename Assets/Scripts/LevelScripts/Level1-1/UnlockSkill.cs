@@ -16,15 +16,17 @@ public class UnlockSkill : MonoBehaviour
     private PlayerController controller;
     [SerializeField]
     private RotationBird birdMove;
+    private bool entered;
 
     private void Start()
     {
         text.SetActive(false);
+        entered = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab)&& entered)
         {
             //controller.enabled = true;
             birdMove.ReturnPosition();
@@ -36,13 +38,15 @@ public class UnlockSkill : MonoBehaviour
     {
         if (other.transform.CompareTag("Player")&&!PlayerController.Instance.hasChangeSpaceSkill)
         {
+            entered = false;
             text.gameObject.SetActive(true);
             PlayerController.Instance.hasChangeSpaceSkill = true;
             PlayerController.Instance.SetAnimatorStop();
             controller.enabled = false;
             birdMove.enabled = true;
+            birdMove.returnPos = false;
             birdMove.SetRotateTarget(orientationPoint);
-            birdMove.SetRotateType(RotateType.trigger);
+            birdMove.SetRotateType(RotateType.skill_Space);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -50,6 +54,8 @@ public class UnlockSkill : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             text.gameObject.SetActive(false);
+            entered = false;
+                
         }
     }
 }

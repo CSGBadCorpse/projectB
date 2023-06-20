@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BossHit : MonoBehaviour
 {
+    [SerializeField]
+    private BossEnd bossEnd;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Player") && !bossEnd.bossDead)
         {
-            Debug.Log("Hitted");
+            Respawn.Instance.ResetLevel();
         }
     }
 }
