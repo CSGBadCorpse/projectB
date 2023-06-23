@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
     //是否拾取了道具
     private bool pickUpStick;
 
-    public bool hasChangeSpaceSkill;
+    public bool skill_ChangeSpace;
+    public bool skill_ChangeTime;
 
     [SerializeField]
     [Header("鸟的位置")]
@@ -81,7 +82,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        hasChangeSpaceSkill = false;
+        skill_ChangeSpace = false;
+        skill_ChangeTime = false;
     }
 
     private void Start()

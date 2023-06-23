@@ -9,7 +9,7 @@ public class EnterCamera : MonoBehaviour
 
     [SerializeField]
     private CinemachineVirtualCamera bossCamera;
-
+    
 
     private void Start()
     {
@@ -20,6 +20,7 @@ public class EnterCamera : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             bossCamera.Priority = 10;
+            
         }
     }
 
@@ -28,6 +29,7 @@ public class EnterCamera : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             bossCamera.Priority = 0;
+              
         }
     }
 }

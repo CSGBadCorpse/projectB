@@ -27,8 +27,12 @@ public class TreeLeafNow : MonoBehaviour
         get { return currentTime; }
 
     }
-
-    private MeshRenderer meshRenderer;
+    [SerializeField]
+    private GameObject enabledLeafObject;
+    [SerializeField]
+    private GameObject disabledLeafObject;
+    [SerializeField]
+    private GameObject disableStickObject;
     private BoxCollider boxCollider;
 
 
@@ -37,7 +41,7 @@ public class TreeLeafNow : MonoBehaviour
         TimeController.Instance.Event_OnTimeChanged += TimeController_Event_OnTimeChanged;
         startCountDown = false;
         currentTime = 0;
-        meshRenderer = this.GetComponent<MeshRenderer>();
+        //nowLeafObject = this.GetComponent<MeshRenderer>();
         boxCollider = this.GetComponent<BoxCollider>();
         Respawn.Instance.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         EnableSelf();
@@ -113,15 +117,43 @@ public class TreeLeafNow : MonoBehaviour
     }
     private void DisableSelf()
     {
-        meshRenderer.enabled = false;
+        //nowLeafObject.enabled = false;
+        enabledLeafObject.SetActive(false);
+        if (TimeController.Instance.IsNow())
+        {
+            disabledLeafObject.SetActive(true);
+            disableStickObject.SetActive(true);
+        }
+        else if (!TimeController.Instance.IsNow())
+        {
+            disabledLeafObject.SetActive(false);
+            disableStickObject.SetActive(false);
+        }
+        
         boxCollider.enabled = false;
     }
 
     private void EnableSelf()
     {
-        meshRenderer.enabled = true;
+        //nowLeafObject.enabled = true;
+        //Debug.Log("EnableLeaf");
+        enabledLeafObject.SetActive(true);
+        disabledLeafObject.SetActive(false);
+        disableStickObject.SetActive(true);
         boxCollider.enabled = true;
     }
+    /*private void DisapearDisable()
+    {
+
+        enabledLeafObject.SetActive(false);
+        disabledLeafObject.SetActive(false);
+        boxCollider.enabled = false;
+    }
+
+    private void ShowEnable()
+    {
+
+    }*/
 
     private GUIStyle _tabStyle;
 #if UNITY_EDITOR

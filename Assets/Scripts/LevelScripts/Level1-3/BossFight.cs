@@ -9,6 +9,8 @@ public class BossFight : MonoBehaviour
     private Animator mAnimator;
     [SerializeField]
     private Animation mAnimation;
+    /*[SerializeField]
+    private AudioSource mSource;*/
 
     private void Start()
     {
@@ -30,6 +32,14 @@ public class BossFight : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             mAnimator.SetBool("Entered",true);
+            //StartCoroutine(PlayBGM());
+            
         }
     }
+    /*IEnumerator PlayBGM()
+    {
+        yield return new WaitForSeconds(3f); 
+        mSource.gameObject.SetActive(true);
+        mSource.Play();
+    }*/
 }

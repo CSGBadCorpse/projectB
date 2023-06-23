@@ -5191,7 +5191,7 @@ AudioSource:
       outWeight: 1
     - serializedVersion: 3
       time: 1
-      value: 0.19934082
+      value: 0.108932495
       inSlope: -0.029150197
       outSlope: -0.029150197
       tangentMode: 0
@@ -5221,7 +5221,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -17040,7 +17040,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470158522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 126.3, y: 12, z: -11}
+  m_LocalPosition: {x: -19.6, y: 4.1, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22433,8 +22433,8 @@ AudioSource:
       inWeight: 0.096389145
       outWeight: 0.40543553
     - serializedVersion: 3
-      time: 1
-      value: 0.07548523
+      time: 0.99661255
+      value: 0
       inSlope: -1.9634346
       outSlope: -1.9634346
       tangentMode: 0
@@ -30842,7 +30842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748068361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 126.3, y: 12, z: -11}
+  m_LocalPosition: {x: -19.6, y: 4.1, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53359,7 +53359,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d611b83b332ff4645a555b51bef3f4ba, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c0220910e4888ab49a98d20bc0eb5a46, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -53389,22 +53389,22 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.6639557
-      value: 0.75083923
-      inSlope: -1.2868764
-      outSlope: -1.2868764
+      time: 0.70477295
+      value: 0.7006149
+      inSlope: -1.56025
+      outSlope: -1.56025
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0.4206557
+      inWeight: 0.120092764
+      outWeight: 0.2524111
     - serializedVersion: 3
       time: 0.8161316
       value: 0
-      inSlope: -1.0249783
-      outSlope: -1.0249783
+      inSlope: -8.066718
+      outSlope: -8.066718
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.5027004
+      inWeight: 0.13452762
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -60926,6 +60926,7 @@ MonoBehaviour:
   orientationPoint: {fileID: 617915528}
   controller: {fileID: 2021005679}
   birdMove: {fileID: 2021005681}
+  rotationType: 0
 --- !u!1 &1507972966
 GameObject:
   m_ObjectHideFlags: 0
@@ -73397,7 +73398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1814378791}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ButtonStayPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86231,7 +86232,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7160f89287d3c024e9c218ac6294f859, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.148
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -86408,11 +86409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542313913724357124, guid: 501ed8b41cb77614b8d887642b48111d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 126.3
+      value: -19.6
       objectReference: {fileID: 0}
     - target: {fileID: 5542313913724357124, guid: 501ed8b41cb77614b8d887642b48111d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5542313913724357124, guid: 501ed8b41cb77614b8d887642b48111d, type: 3}
       propertyPath: m_LocalPosition.z

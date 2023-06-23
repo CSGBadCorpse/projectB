@@ -14,6 +14,8 @@ public class MovingBlock : MonoBehaviour
     Transform[] routes;
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private AudioSource chainAudio;
     
     int index = 0;
 
@@ -21,6 +23,7 @@ public class MovingBlock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        chainAudio.enabled = false;
         activated = false;
         TriggerSocket.Instance.Event_ActivateMovingBlock += TriggerSocket_Event_ActivateMovingBlock;
     }
@@ -28,6 +31,7 @@ public class MovingBlock : MonoBehaviour
     private void TriggerSocket_Event_ActivateMovingBlock(object sender, System.EventArgs e)
     {
         activated = !activated;
+        chainAudio.enabled = !chainAudio.enabled;
     }
 
     // Update is called once per frame
@@ -48,6 +52,7 @@ public class MovingBlock : MonoBehaviour
             float step = moveSpeed * Time.deltaTime;
             if (activated)
             {
+               
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, routes[index].position, step);
             }
             

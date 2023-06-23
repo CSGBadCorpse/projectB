@@ -29,9 +29,12 @@ public class TimeController : MonoBehaviour
     [Header("遮罩消失速度")]
     [SerializeField]
     private float disappearSpeed;
+    [SerializeField]
+    private ParticleSystem particles;
 
 
     private bool switchTime;
+    [SerializeField]
     private TimeMode time;
     private bool countToAppear;
     private bool countToDisappear;
@@ -42,7 +45,7 @@ public class TimeController : MonoBehaviour
 
     void Start()
     {
-        time = TimeMode.Now;
+        //time = TimeMode.Now;
         switchTime = false;
         countToAppear = false;
         countToDisappear = false;
@@ -53,8 +56,9 @@ public class TimeController : MonoBehaviour
     {
         
         switchTime = Input.GetKeyDown(KeyCode.R);//切换时空技能键
-        if (switchTime)//在这里写一个判断开门动画是否完成的判断条件（可以写一个动画管理器判断所有的动画是否完成播放）
+        if (switchTime&&PlayerController.Instance.skill_ChangeTime)//在这里写一个判断开门动画是否完成的判断条件（可以写一个动画管理器判断所有的动画是否完成播放）
         {
+            particles.Play();
             if (time == TimeMode.Old)
             {
                 time = TimeMode.Now;

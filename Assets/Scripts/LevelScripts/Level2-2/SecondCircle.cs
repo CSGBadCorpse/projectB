@@ -16,8 +16,8 @@ public class SecondCircle : MonoBehaviour, IPointerEnterHandler, IBeginDragHandl
     private Vector2 centerPosition;
 
     private bool solved = false;
-
-    private float offset = 4f;
+    [SerializeField]
+    private float offset = 2f;
 
     private bool secondCircleRotate = false;
 

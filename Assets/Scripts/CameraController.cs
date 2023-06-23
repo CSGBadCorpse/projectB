@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         switchMode = Input.GetKeyDown(KeyCode.Tab);//切换视角技能键
-        if (switchMode && ViewChange.Instance.IsChangeFinished() && PlayerController.Instance.hasChangeSpaceSkill)
+        if (switchMode && ViewChange.Instance.IsChangeFinished() && PlayerController.Instance.skill_ChangeSpace)
         {
             if (virtualCamera.Priority > 2)//如果是3d就切换回2d
             {

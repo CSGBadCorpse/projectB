@@ -38,6 +38,10 @@ public class DoorPuzzle : MonoBehaviour
 
 
     private bool figuringPuzzle=false;
+    public bool FiguringPuzzle
+    {
+        get { return figuringPuzzle; }
+    }
     private bool nearby = false;
 
     private bool firstCircle = false;

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FinalDoor : MonoBehaviour
 {
+    private const string PUZZLE_FIXED = "PuzzleFixed";
     public static FinalDoor Instance { get; private set; }
     public event EventHandler Event_OnDoorOpened;
 
@@ -15,7 +16,7 @@ public class FinalDoor : MonoBehaviour
     [SerializeField]
     private GameObject thirdStatue;
     [SerializeField]
-    private GameObject door;
+    private Animator openAnimator;
 
     private bool firstActivated;
     private bool secondActivated;
@@ -41,7 +42,8 @@ public class FinalDoor : MonoBehaviour
         {
             Event_OnDoorOpened?.Invoke(this, EventArgs.Empty);
             Debug.Log("开门动画");
-            door.SetActive(false);
+            //door.SetActive(false);
+            openAnimator.SetTrigger(PUZZLE_FIXED);
             firstActivated = false;
             secondActivated = false;
             thirdActivated = false;

@@ -10,6 +10,12 @@ public class BossEnd : MonoBehaviour
     public bool bossDead = false;
     [SerializeField]
     private BoxCollider[] bossArms;
+    [SerializeField]
+    private AudioSource mBossAudioSource;
+    [SerializeField]
+    private AudioClip hitGroundClip;
+    [SerializeField]
+    private AudioClip fistHitClip;
 
     public event EventHandler OnBossEnd;
 
@@ -57,5 +63,14 @@ public class BossEnd : MonoBehaviour
         }
     }
 
-
+    public void HitGroundClip()
+    {
+        mBossAudioSource.clip = hitGroundClip;
+        mBossAudioSource.Play();
+    }
+    public void FistHitClip()
+    {
+        mBossAudioSource.clip = fistHitClip;
+        mBossAudioSource.Play();
+    }
 }

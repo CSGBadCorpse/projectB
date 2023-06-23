@@ -26,8 +26,15 @@ public class TreeLeafOld : MonoBehaviour
         get { return currentTime; }
     }
 
+    [SerializeField]
+    private GameObject enabledLeafObject;
+    [SerializeField]
+    private GameObject disabledLeafObject;
+    [SerializeField]
+    private GameObject disableStickObject;
 
-    private MeshRenderer meshRenderer;
+
+    //private MeshRenderer meshRenderer;
     private BoxCollider boxCollider;
 
 
@@ -36,7 +43,7 @@ public class TreeLeafOld : MonoBehaviour
         TimeController.Instance.Event_OnTimeChanged += TimeController_Event_OnTimeChanged;
         startCountDown = false;
         currentTime = 0;
-        meshRenderer = this.GetComponent<MeshRenderer>();
+        //meshRenderer = this.GetComponent<MeshRenderer>();
         boxCollider = this.GetComponent<BoxCollider>();
         Respawn.Instance.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         DisableSelf();
@@ -61,7 +68,7 @@ public class TreeLeafOld : MonoBehaviour
             }
             else if (nowLeafStandCurrentTime > 0 && nowLeafStandCurrentTime < standTime && currentTime != standTime)
             {
-                currentTime = standTime - nowLeaf.GetComponent<TreeLeafNow>().CurrentTime;
+                currentTime =  nowLeaf.GetComponent<TreeLeafNow>().CurrentTime;
             }
             EnableSelf();
         }
@@ -119,13 +126,27 @@ public class TreeLeafOld : MonoBehaviour
 
     private void DisableSelf()
     {
-        meshRenderer.enabled = false;
+        //meshRenderer.enabled = false;
+        enabledLeafObject.SetActive(false);
+        if (!TimeController.Instance.IsNow())
+        {
+            disabledLeafObject.SetActive(true);
+            disableStickObject.SetActive(true);
+        }
+        else if (TimeController.Instance.IsNow())
+        {
+            disabledLeafObject.SetActive(false);
+            disableStickObject.SetActive(false);
+        }
         boxCollider.enabled = false;
     }
 
     private void EnableSelf()
     {
-        meshRenderer.enabled = true;
+        //meshRenderer.enabled = true;
+        enabledLeafObject.SetActive(true);
+        disabledLeafObject.SetActive(false);
+        disableStickObject.SetActive(true);
         boxCollider.enabled = true;
     }
 

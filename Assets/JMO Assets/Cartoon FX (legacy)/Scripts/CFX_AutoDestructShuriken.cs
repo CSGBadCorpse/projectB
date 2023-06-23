@@ -27,7 +27,7 @@ public class CFX_AutoDestructShuriken : MonoBehaviour
 			yield return new WaitForSeconds(0.5f);
 			if(!ps.IsAlive(true))
 			{
-				if(OnlyDeactivate)
+				/*if(OnlyDeactivate)
 				{
 					#if UNITY_3_5
 						this.gameObject.SetActiveRecursively(false);
@@ -37,7 +37,7 @@ public class CFX_AutoDestructShuriken : MonoBehaviour
 				}
 				else
 					GameObject.Destroy(this.gameObject);
-				break;
+				break;*/
 			}
 		}
 	}

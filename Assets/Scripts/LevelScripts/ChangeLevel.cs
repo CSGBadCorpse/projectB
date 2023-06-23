@@ -9,9 +9,11 @@ public class ChangeLevel : MonoBehaviour
     Scene scene;
     [SerializeField]
     private VideoPlayer videoPlayer;
+    public static ChangeLevel Instances;
 
     private void Awake()
     {
+        Instances = this;
         if (videoPlayer != null)
         {
             videoPlayer.loopPointReached += VideoPlayer_loopPointReached;
@@ -35,15 +37,17 @@ public class ChangeLevel : MonoBehaviour
         {
             Shader.SetGlobalFloat("SphereRadius", 1.4f);
             Shader.SetGlobalFloat("TopDown_Radius", 1.4f);
-            PlayerController.Instance.hasChangeSpaceSkill = true;
+            PlayerController.Instance.skill_ChangeSpace = true;
         }
         if (scene.name == "Level2-1")
         {
-            PlayerController.Instance.hasChangeSpaceSkill = true;
+            PlayerController.Instance.skill_ChangeSpace = true;
+            
         }
         if (scene.name == "Level2-2")
         {
-            PlayerController.Instance.hasChangeSpaceSkill = true;
+            PlayerController.Instance.skill_ChangeSpace = true;
+            PlayerController.Instance.skill_ChangeTime = true;
         }
     }
 
@@ -80,5 +84,9 @@ public class ChangeLevel : MonoBehaviour
             }
             
         }
+    }
+    public void GotoEndScene()
+    {
+        SceneManager.LoadScene("EndScene");
     }
 }

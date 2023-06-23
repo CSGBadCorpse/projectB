@@ -18,6 +18,9 @@ public class UnlockSkill : MonoBehaviour
     private RotationBird birdMove;
     private bool entered;
 
+    [SerializeField]
+    private RotateType rotationType;
+
     private void Start()
     {
         text.SetActive(false);
@@ -28,25 +31,46 @@ public class UnlockSkill : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab)&& entered)
         {
-            //controller.enabled = true;
+            controller.enabled = true;
             birdMove.ReturnPosition();
             //birdMove.enabled = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.R) && entered)
+        {
+            controller.enabled = true;
+            birdMove.ReturnPosition();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player")&&!PlayerController.Instance.hasChangeSpaceSkill)
+        if (other.transform.CompareTag("Player"))
         {
-            entered = false;
-            text.gameObject.SetActive(true);
-            PlayerController.Instance.hasChangeSpaceSkill = true;
-            PlayerController.Instance.SetAnimatorStop();
-            controller.enabled = false;
-            birdMove.enabled = true;
-            birdMove.returnPos = false;
-            birdMove.SetRotateTarget(orientationPoint);
-            birdMove.SetRotateType(RotateType.skill_Space);
+            if(rotationType==RotateType.skill_Space && !PlayerController.Instance.skill_ChangeSpace)
+            {
+                entered = true;
+                text.gameObject.SetActive(true);
+                PlayerController.Instance.skill_ChangeSpace = true;
+                PlayerController.Instance.SetAnimatorStop();
+                controller.enabled = false;
+                birdMove.enabled = true;
+                birdMove.returnPos = false;
+                birdMove.SetRotateTarget(orientationPoint);
+                birdMove.SetRotateType(rotationType);
+            } 
+            else if(rotationType == RotateType.skill_Time && !PlayerController.Instance.skill_ChangeTime) 
+            {
+                entered = true;
+                text.gameObject.SetActive(true);
+                PlayerController.Instance.skill_ChangeTime = true;
+                PlayerController.Instance.SetAnimatorStop();
+                controller.enabled = false;
+                birdMove.enabled = true;
+                birdMove.returnPos = false;
+                birdMove.SetRotateTarget(orientationPoint);
+                birdMove.SetRotateType(rotationType);
+            }
+            
         }
     }
     private void OnTriggerExit(Collider other)

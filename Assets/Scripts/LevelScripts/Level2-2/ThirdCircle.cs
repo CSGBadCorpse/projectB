@@ -7,7 +7,8 @@ public class ThirdCircle : MonoBehaviour
     public static ThirdCircle Instance { get; private set; }
     public event EventHandler Event_OnCircleZero;
     public event EventHandler Event_OnCircleNotZero;
-    private float offset = 4f;
+    [SerializeField]
+    private float offset = 2f;
 
     private bool firstCircleEnd = false;
     private bool secondCircleEnd = false;
