@@ -10,6 +10,10 @@ public class TriggerSocket : MonoBehaviour
 
 
     private bool approachTrigger;
+    public bool ApproachTrigger
+    {
+        get { return approachTrigger; }
+    }
 
 
     private void Awake()
@@ -29,7 +33,7 @@ public class TriggerSocket : MonoBehaviour
         {
             if (PlayerController.Instance.HasTrigger() && !TimeController.Instance.IsNow())
             {
-                Debug.Log("Active Moving plank");
+                //Debug.Log("Active Moving plank");
                 Event_ActivateMovingBlock?.Invoke(this, EventArgs.Empty);
             }
         }

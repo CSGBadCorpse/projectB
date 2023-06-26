@@ -31,10 +31,16 @@ public class BossFight : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            mAnimator.SetBool("Entered",true);
+            StartCoroutine(StartFight());
+           
             //StartCoroutine(PlayBGM());
             
         }
+    }
+    IEnumerator StartFight()
+    {
+        yield return new WaitForSeconds(5f);
+        mAnimator.SetBool("Entered", true);
     }
     /*IEnumerator PlayBGM()
     {

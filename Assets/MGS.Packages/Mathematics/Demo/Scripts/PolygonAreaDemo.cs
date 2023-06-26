@@ -25,6 +25,7 @@ namespace MGS.Mathematics.Demo
         List<Vector2> ps;
 
         [ContextMenu("Build Area")]
+        [System.Obsolete]
         void Start()
         {
             var line = GetComponent<LineRenderer>();

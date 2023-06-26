@@ -13,11 +13,11 @@ public class Trigger1 : MonoBehaviour
     private Vector3 rotationAxis = Vector3.forward; // 旋转轴向
     private float rotationAngle; // 旋转角度
 
-    private bool enter;
+    //private bool enter;
 
     private void Start()
     {
-        enter = false;
+        //enter = false;
         objectA.transform.RotateAround(objectB.transform.position, rotationAxis, 180f);
     }
 
@@ -53,16 +53,16 @@ public class Trigger1 : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        /*if (other.transform.CompareTag("Player"))
         {
             enter = true;
-        }
+        }*/
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        /*if (other.transform.CompareTag("Player"))
         {
             enter = false;
-        }
+        }*/
     }
 }

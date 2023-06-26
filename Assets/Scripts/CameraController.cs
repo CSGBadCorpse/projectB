@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     private Transform globalLight;
 
     private Camera mainCamera;
-
+    [SerializeField]
     private GameMode mode;
 
     private bool switchMode;

@@ -35,6 +35,7 @@ public class RotationBird : MonoBehaviour
     private bool rotate = true;
 
     private RotateType m_rotateType;
+    public bool isPlank;
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class RotationBird : MonoBehaviour
         {
             m_target = transform;
         }
+        isPlank = false;
     }
 
 
@@ -64,9 +66,16 @@ public class RotationBird : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, rotationY, 0f);
             yield return null;
         }
-
+        Quaternion newRotation=Quaternion.identity;
         // 取消当前脚本的激活状态
-        Quaternion newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, 0);
+        if (!isPlank)
+        {
+            newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, subTrans.rotation.eulerAngles.y, 0);
+        }
+        if (isPlank)
+        {
+            newRotation = Quaternion.Euler(subTrans.rotation.eulerAngles.x, 90f, 0);
+        }
         subTrans.rotation = newRotation;
         //transform.rotation = Quaternion.identity;
         //subTrans.rotation = Quaternion.identity;
@@ -85,7 +94,7 @@ public class RotationBird : MonoBehaviour
                 // 计算物体与目标点之间的向量
                 Vector3 direction = m_target.position - transform.position;
 
-                Debug.Log("rotation:" + direction.magnitude);
+                //Debug.Log("rotation:" + direction.magnitude);
                 // 如果距离小于一个阈值，则认为已到达目标点
                 if (direction.magnitude < 0.01f)
                 {
@@ -164,6 +173,7 @@ public class RotationBird : MonoBehaviour
             if (direction.magnitude < 0.01f)
             {
                 // 开始旋转动画协程
+                Debug.Log("End Rotation");
                 StartCoroutine(RotateToOriginPosition());
                 return;
             }

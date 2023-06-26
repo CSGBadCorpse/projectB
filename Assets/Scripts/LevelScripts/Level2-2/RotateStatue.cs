@@ -20,6 +20,10 @@ public class RotateStatue : MonoBehaviour
 {
 
     private bool enableRotate;
+    public bool EnableRotate
+    {
+        get { return enableRotate; }
+    }
     //private bool activate;
     [SerializeField]
     public bool activate;

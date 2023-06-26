@@ -56,7 +56,7 @@ public class TimeController : MonoBehaviour
     {
         
         switchTime = Input.GetKeyDown(KeyCode.R);//切换时空技能键
-        if (switchTime&&PlayerController.Instance.skill_ChangeTime)//在这里写一个判断开门动画是否完成的判断条件（可以写一个动画管理器判断所有的动画是否完成播放）
+        if (switchTime && PlayerController.Instance.skill_ChangeTime && ( effectCanvas.alpha==1f || effectCanvas.alpha == 0))//在这里写一个判断开门动画是否完成的判断条件（可以写一个动画管理器判断所有的动画是否完成播放）
         {
             particles.Play();
             if (time == TimeMode.Old)

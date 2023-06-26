@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     //角色控制脚本
     public static PlayerController Instance { private set; get; }
     public event EventHandler Event_ActivateTriggers;
+    public event EventHandler Event_ActivateTriggerCanvas;
     //
 
     private Transform trans;
@@ -66,6 +67,10 @@ public class PlayerController : MonoBehaviour
     private string triggerName;
     //是否拾取了道具
     private bool pickUpStick;
+    public bool PickUpStick
+    {
+        get { return pickUpStick; }
+    }
 
     public bool skill_ChangeSpace;
     public bool skill_ChangeTime;
@@ -161,7 +166,8 @@ public class PlayerController : MonoBehaviour
             pickUpStick = true;
             if (pickUpStick)
             {
-                Debug.Log("捡起了道具");
+                //Debug.Log("捡起了道具");
+                Event_ActivateTriggerCanvas?.Invoke(this, EventArgs.Empty);
             }
         }
     }

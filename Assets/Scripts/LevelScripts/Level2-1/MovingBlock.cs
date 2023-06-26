@@ -69,7 +69,7 @@ public class MovingBlock : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("Landed");
+            //Debug.Log("Landed");
             //this.gameObject.transform.child
             player.transform.SetParent(this.transform);
         }
@@ -78,7 +78,7 @@ public class MovingBlock : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
             player.transform.SetParent(null);
         }
     }

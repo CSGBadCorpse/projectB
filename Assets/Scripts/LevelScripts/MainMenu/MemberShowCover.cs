@@ -20,6 +20,7 @@ public class MemberShowCover : MonoBehaviour
     }
 
     // Update is called once per frame
+    [System.Obsolete]
     void Update()
     {
         if (show && effectCanvas.gameObject.active)

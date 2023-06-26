@@ -16,6 +16,10 @@ public class BossEnd : MonoBehaviour
     private AudioClip hitGroundClip;
     [SerializeField]
     private AudioClip fistHitClip;
+    [SerializeField]
+    private Right2DHand rightHand;
+    [SerializeField]
+    private Left2DHand leftHand;
 
     public event EventHandler OnBossEnd;
 
@@ -72,5 +76,32 @@ public class BossEnd : MonoBehaviour
     {
         mBossAudioSource.clip = fistHitClip;
         mBossAudioSource.Play();
+    }
+
+    public void Activate2DHand()
+    {
+        rightHand.Activate2DHit();
+        leftHand.Activate2DHit();
+    }
+    public void Deactivate2DHand()
+    {
+        rightHand.Deactivate2DHit();
+        leftHand.Deactivate2DHit();
+    }
+    public void ActivateRightHand()
+    {
+        rightHand.Activate2DHit();
+    }
+    public void DeactivateRightHand()
+    {
+        rightHand.Deactivate2DHit();
+    }
+    public void ActivateLeftHand()
+    {
+        leftHand.Activate2DHit();
+    }
+    public void DeactivateLeftHand()
+    {
+        leftHand.Deactivate2DHit();
     }
 }

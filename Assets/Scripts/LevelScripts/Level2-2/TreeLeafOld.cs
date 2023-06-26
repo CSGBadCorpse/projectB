@@ -32,6 +32,8 @@ public class TreeLeafOld : MonoBehaviour
     private GameObject disabledLeafObject;
     [SerializeField]
     private GameObject disableStickObject;
+    [SerializeField]
+    private MeshRenderer meshRenderer;
 
 
     //private MeshRenderer meshRenderer;
@@ -126,16 +128,16 @@ public class TreeLeafOld : MonoBehaviour
 
     private void DisableSelf()
     {
-        //meshRenderer.enabled = false;
-        enabledLeafObject.SetActive(false);
+        meshRenderer.enabled = false;
+        //enabledLeafObject.SetActive(false);
         if (!TimeController.Instance.IsNow())
         {
-            disabledLeafObject.SetActive(true);
+            //disabledLeafObject.SetActive(true);
             disableStickObject.SetActive(true);
         }
         else if (TimeController.Instance.IsNow())
         {
-            disabledLeafObject.SetActive(false);
+            //disabledLeafObject.SetActive(false);
             disableStickObject.SetActive(false);
         }
         boxCollider.enabled = false;
@@ -143,9 +145,9 @@ public class TreeLeafOld : MonoBehaviour
 
     private void EnableSelf()
     {
-        //meshRenderer.enabled = true;
-        enabledLeafObject.SetActive(true);
-        disabledLeafObject.SetActive(false);
+        meshRenderer.enabled = true;
+        //enabledLeafObject.SetActive(true);
+        //disabledLeafObject.SetActive(false);
         disableStickObject.SetActive(true);
         boxCollider.enabled = true;
     }

@@ -1753,7 +1753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u7F8E\u672F\n<size=7>\n<size=18>\u5218\u5927\u7EB2<size=12>\uFF08\u5218\u4FD0\u541B\uFF09\n<size=18>\u5B89\u5B89<size=12>\uFF08\u5434\u9526\u6CC9\uFF09\n<size=18>\u96E8\u72F8<size=12>\uFF08\u5F20\u7FBD\u742A\uFF09"
+  m_text: "\u7F8E\u672F\n<size=7>\n<size=18>\u5218\u5927\u7EB2<size=12>\uFF08\u5218\u4FD0\u541B\uFF09\n<size=18>\u963F\u5B89<size=12>\uFF08\u5434\u9526\u6CC9\uFF09\n<size=18>\u96E8\u72F8<size=12>\uFF08\u5F20\u7FBD\u742A\uFF09"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 964234cede84e0f43a3e9f1f4dd51420, type: 2}
   m_sharedMaterial: {fileID: 5158848031595598389, guid: 964234cede84e0f43a3e9f1f4dd51420, type: 2}

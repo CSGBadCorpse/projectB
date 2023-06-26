@@ -18,6 +18,7 @@ public class StartShowCover : MonoBehaviour
     }
 
     // Update is called once per frame
+    [System.Obsolete]
     void Update()
     {
         if(start&& effectCanvas.gameObject.active)
