@@ -31,7 +31,7 @@ public class TriggerSocket : MonoBehaviour
     {
         if (approachTrigger)
         {
-            if (PlayerController.Instance.HasTrigger() && !TimeController.Instance.IsNow())
+            if (PlayerController.Instance.HasTrigger())
             {
                 //Debug.Log("Active Moving plank");
                 Event_ActivateMovingBlock?.Invoke(this, EventArgs.Empty);

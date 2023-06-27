@@ -78,7 +78,7 @@ public class RotateStatue : MonoBehaviour
                 statue.Rotate(0, 90, 0);
             }
         }
-        Debug.Log(this.gameObject.name + " : " + statue.eulerAngles.y);
+        //Debug.Log(this.gameObject.name + " : " + statue.eulerAngles.y);
         if(statue.eulerAngles.y == GetRotationFromEnum(targetRotation))
         {
             activate = true;

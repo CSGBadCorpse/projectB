@@ -24,7 +24,7 @@ public class Right2DHand : MonoBehaviour
     }
     public void Activate2DHit()
     {
-        Debug.Log("Activate");
+        //Debug.Log("Activate");
         if(CameraController.Instance.Is2DGame()) 
         {
             boxCollider.isTrigger = true;
@@ -33,7 +33,7 @@ public class Right2DHand : MonoBehaviour
     }
     public void Deactivate2DHit()
     {
-        Debug.Log("Deactivate");
+        //Debug.Log("Deactivate");
         boxCollider.isTrigger = true;
         boxCollider.enabled = false;
     }

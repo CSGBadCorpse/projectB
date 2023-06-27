@@ -9,6 +9,10 @@ public class BossFight : MonoBehaviour
     private Animator mAnimator;
     [SerializeField]
     private Animation mAnimation;
+    [SerializeField]
+    private GameObject[] hitAreas;
+    [SerializeField]
+    private GameObject[] hit2DHandsArea;
     /*[SerializeField]
     private AudioSource mSource;*/
 
@@ -25,6 +29,14 @@ public class BossFight : MonoBehaviour
         mAnimation.Sample();*/
 
         mAnimator.SetBool("Entered", false);
+        foreach (var hit in hit2DHandsArea)
+        {
+            hit.GetComponent<BoxCollider>().enabled = false;
+        }
+        foreach (var hit in hitAreas)
+        {
+            hit.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +52,11 @@ public class BossFight : MonoBehaviour
     IEnumerator StartFight()
     {
         yield return new WaitForSeconds(5f);
+        foreach (var hit in hitAreas) 
+        {
+            hit.SetActive(true);
+        }
+        
         mAnimator.SetBool("Entered", true);
     }
     /*IEnumerator PlayBGM()
