@@ -34,6 +34,11 @@ public class TimeController : MonoBehaviour
 
 
     private bool switchTime;
+    public bool SwitchTime
+    {
+        get { return switchTime; }
+    }
+
     [SerializeField]
     private TimeMode time;
     private bool countToAppear;

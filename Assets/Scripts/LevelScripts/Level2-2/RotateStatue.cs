@@ -67,6 +67,10 @@ public class RotateStatue : MonoBehaviour
 
     private void Update()
     {
+        if (enableRotate && TimeController.Instance.SwitchTime)
+        {
+            enableRotate = false;
+        }
         if (enableRotate&&!finalDoorOpened)
         {
             if (Input.GetKeyDown(KeyCode.F))
